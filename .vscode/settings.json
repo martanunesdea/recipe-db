@@ -64,6 +64,15 @@
         "fstream": "cpp",
         "iomanip": "cpp",
         "stack": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "__tree": "cpp",
+        "future": "cpp",
+        "map": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "thread": "cpp",
+        "variant": "cpp"
     }
 }

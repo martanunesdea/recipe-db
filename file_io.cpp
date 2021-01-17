@@ -4,7 +4,8 @@
 #include <iostream>
 #include <istream> // for getline
 #include <sstream> // for istringstream
-#include "file_io.h"
+#include "file_io.hpp"
+#include "catch.hpp"
 
 void File::set_filename(std::string name)
 {
@@ -59,5 +60,10 @@ bool File::open_file()
 
 bool File::process_rows()
 {
+    return OK;
+}
 
+std::string set_name(std::string filename)
+{
+    return filename;
 }
