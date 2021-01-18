@@ -21,7 +21,7 @@ const bool NOK = false;
 class File {
     private:
         std::string filename;
-        std::ifstream f;
+        std::ifstream file_handle;
         char delimitor;
         bool headers;
         std::vector<std::string> single_entries;
@@ -33,7 +33,7 @@ class File {
         File(std::string in_filename) : filename(in_filename) {}
         File(std::string in_filename, char in_delim, bool in_headers)
             : filename(in_filename), delimitor(in_delim), headers(in_headers){}
-        void set_details(std::string name, char delimitor, bool headers);
+        bool set_details(std::string name, char delimitor, bool headers);
         void set_filename(std::string name);
         std::string get_filename();
         bool open_file();

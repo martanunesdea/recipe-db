@@ -17,16 +17,18 @@ std::string File::get_filename()
     return this->filename;
 }
 
-void File::set_details(std::string name, char delimitor, bool headers)
+bool File::set_details(std::string name, char delimitor, bool headers)
 {
     this->filename = name;
     this->delimitor = delimitor;
     this->headers = headers;
+    return OK;
 }
 
 bool File::open_file()
 {
     std::ifstream file_handle(this->filename);
+    
     if ( !file_handle.is_open() )
     {
        return NOK;
