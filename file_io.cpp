@@ -5,7 +5,6 @@
 #include <istream> // for getline
 #include <sstream> // for istringstream
 #include "file_io.hpp"
-#include "catch.hpp"
 
 void File::set_filename(std::string name)
 {
