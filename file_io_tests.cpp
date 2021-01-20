@@ -3,13 +3,6 @@
 #include "file_io.hpp"
 #include <string>
 
-
-TEST_CASE("set filename", "[classic]")
-{
-    std::string name = "marta";
-    REQUIRE(set_name(name) == "marta");
-}
-
 TEST_CASE("open file")
 {
     std::string filename = "file.txt";

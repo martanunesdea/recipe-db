@@ -24,6 +24,7 @@ class File {
         std::ifstream file_handle;
         char delimitor;
         bool headers;
+        std::vector<std::vector<std::string>> entries;
         std::vector<std::string> single_entries;
         std::vector<std::string> header_row;
         std::vector<std::string> rows;
@@ -37,7 +38,7 @@ class File {
         void set_filename(std::string name);
         std::string get_filename();
         bool open_file();
-        bool process_rows();
+        bool print_titles();
 };
 
 #endif

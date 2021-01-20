@@ -34,9 +34,10 @@ int main()
     File my_file;
     get_file_details(&my_file);
 
+
     if ( my_file.open_file() == OK )
     {
-
+        my_file.print_titles();
     }
 
 
