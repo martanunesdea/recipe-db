@@ -39,6 +39,7 @@ class File {
         std::string get_filename();
         bool open_file();
         bool print_titles();
+        bool look_up_word(std::string word);
 };
 
 #endif

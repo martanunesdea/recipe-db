@@ -40,6 +40,12 @@ int main()
         my_file.print_titles();
     }
 
+    // look up ingredient "pasta"
+    std::string ingredient;
+    std::cout << "Enter an ingredient to look up in recipe list: " << std::endl;
+    std::cin >> ingredient;
+
+    my_file.look_up_word(ingredient);
 
 
     /* 
