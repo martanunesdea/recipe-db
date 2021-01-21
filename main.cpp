@@ -28,6 +28,20 @@ void get_file_details(File *file_ptr)
     return;
 }
 
+
+void look_up_word(File *my_file)
+{
+    // look up ingredient "pasta"
+    std::string ingredient;
+    std::cout << "Enter an ingredient to look up in recipe list: " << std::endl;
+    std::cin >> ingredient;
+
+    if ( my_file->look_up_word(ingredient) > 0 )
+        my_file->print_matches(); 
+    else std::cout << "Sorry, no matches found\n";
+
+}
+
 int main()
 {
     // std::string filename = get_user_filename();
@@ -35,20 +49,51 @@ int main()
     get_file_details(&my_file);
 
 
-    if ( my_file.open_file() == OK )
+    if ( my_file.open_file() != OK )
     {
-        // my_file.print_titles();
+        std::cout << "Sorry, couldn't open file " << std::endl;
     }
 
-    // look up ingredient "pasta"
-    std::string ingredient;
-    std::cout << "Enter an ingredient to look up in recipe list: " << std::endl;
-    std::cin >> ingredient;
+    while ( true )
+    {
+        char input;
+        std::cout << "\n\nPlease enter a selection from the menu: \n";
+        std::cout << "A. Print all record titles and stats\n";
+        std::cout << "B. Print all record titles and details\n";
+        std::cout << "C. Look up ingredient in recipes\n";
+        std::cout << "D. Look up recipe\n";
+        std::cout << "E. Add recipe\n";
+        std::cout << "F. Edit recipe\n";
+        std::cout << "Q. Quit\n";
+        std::cin >> input;
+        
+        switch(input)
+        {
+            case 'A':
+                my_file.print_titles();
+                break;
+            case 'B':
+                break;
+            case 'C':
+                look_up_word(&my_file); // fix this
+                break;
+            case 'D':
+                // look_up_recipe(&my_file);
+                break;
+            case 'E': 
+                // add new recipe
+                break;
+            case 'F':
+                // edit recipe
+                break;
+            case 'Q':
+                std::cout << "Quitting...\n\n";
+                return 0;
+        }
+                
+    }
 
-    if ( my_file.look_up_word(ingredient) > 0 )
-        my_file.print_matches(); 
-    else std::cout << "Sorry, no matches found\n";
-
+    
 
     // look up by recipe name
     int results = my_file.look_up_title("pesto");
