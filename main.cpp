@@ -37,7 +37,7 @@ int main()
 
     if ( my_file.open_file() == OK )
     {
-        my_file.print_titles();
+        // my_file.print_titles();
     }
 
     // look up ingredient "pasta"
@@ -45,11 +45,18 @@ int main()
     std::cout << "Enter an ingredient to look up in recipe list: " << std::endl;
     std::cin >> ingredient;
 
-    my_file.look_up_word(ingredient);
+    if ( my_file.look_up_word(ingredient) > 0 )
+        my_file.print_matches(); 
+    else std::cout << "Sorry, no matches found\n";
 
 
-    /* 
-    for ( std::string x: words) {
-        std::cout << x << " " << std::endl;
-    } */
+    // look up by recipe name
+    int results = my_file.look_up_title("pesto");
+    if ( results > 0 )
+        my_file.print_matches();
+    // print all all recipes stored
+    my_file.print_titles();
+
+    
+
 }

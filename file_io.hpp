@@ -28,6 +28,9 @@ class File {
         std::vector<std::string> single_entries;
         std::vector<std::string> header_row;
         std::vector<std::string> rows;
+        std::vector<std::vector<std::string>> word_matches;
+        //  std::vector<std::string> title_matches;
+
 
     public:
         File() {}
@@ -38,8 +41,11 @@ class File {
         void set_filename(std::string name);
         std::string get_filename();
         bool open_file();
+        int look_up_word(std::string word);
+        int look_up_title(std::string title);
+        bool print_matches();
         bool print_titles();
-        bool look_up_word(std::string word);
+
 };
 
 #endif
