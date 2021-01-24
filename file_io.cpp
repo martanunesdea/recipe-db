@@ -20,7 +20,6 @@ bool File::open_file()
 
     if ( !file_handle.is_open() )
     {
-        std::cout << "Couldn't open file, returning..." << std::endl;
         return NOK;
     }
 
@@ -49,62 +48,8 @@ bool File::open_file()
             j++;
         }
         i++;
-        std::cout << std::endl;
     }
     return OK;
-}
-
-int File::look_up_title(std::string title)
-{
-    int counter = 0;
-    std::vector<std::string> x;
-    for ( auto i = 0; (i < this->entries.size()); i++ )
-    {
-        x = this->entries[i];
-        if ( title.compare(x[0]) == 0)
-        {
-            counter++;
-            std::cout << "Match with " << x[0] << " in: " << i << std::endl;
-            this->word_matches.push_back(x);
-        }
-    }
-    return counter;
-}
-
-int File::look_up_word(std::string word)
-{
-    int counter = 0;
-    std::vector<std::string> x;
-    for ( auto i = 0; (i < this->entries.size()); i++)
-    {
-        x = this->entries[i];
-        for ( int j = 0; j < x.size(); j++ )
-        {
-            if ( word.compare(x[j]) == 0)
-            {
-                counter++;
-                this->word_matches.push_back(x);
-            }
-        }
-    }
-    return counter;
-}
-
-std::vector<std::vector<std::string>> File::get_matches()
-{
-    std::cout << "Found " << this->word_matches.size() << " matches" << std::endl;
-    
-    return this->word_matches;
-}
-
-std::vector<std::string> File::get_titles()
-{
-    std::vector<std::string> titles;
-    for ( int i = 0; i < this->entries.size(); i++)
-    {
-        titles.push_back(this->entries[i][0]);
-    }
-    return titles;
 }
 
 std::vector<std::vector<std::string>> File::get_all()

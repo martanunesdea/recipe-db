@@ -28,9 +28,6 @@ class File {
         std::vector<std::string> single_entries;
         std::vector<std::string> header_row;
         std::vector<std::string> rows;
-        std::vector<std::vector<std::string>> word_matches;
-        //  std::vector<std::string> title_matches;
-
 
     public:
         File() {}
@@ -39,10 +36,6 @@ class File {
             : filename(in_filename), delimitor(in_delim), headers(in_headers){}
         bool set_details(std::string name, char delimitor, bool headers);
         bool open_file();
-        int look_up_word(std::string word);
-        int look_up_title(std::string title);
-        std::vector<std::vector<std::string>> get_matches();
-        std::vector<std::string> get_titles();
         std::vector<std::vector<std::string>> get_all();
 
 };
