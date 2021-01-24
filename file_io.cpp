@@ -6,16 +6,6 @@
 #include <sstream> // for istringstream
 #include "file_io.hpp"
 
-void File::set_filename(std::string name)
-{
-    this->filename = name;
-}
-
-std::string File::get_filename()
-{
-    return this->filename;
-}
-
 bool File::set_details(std::string name, char delimitor, bool headers)
 {
     this->filename = name;
@@ -64,19 +54,6 @@ bool File::open_file()
     return OK;
 }
 
-bool File::print_titles()
-{
-    std::cout << "Recipes in file: \n";
-    std::vector<std::string> titles;
-    int j = 0;
-    for ( auto i = this->entries.begin(); (i < this->entries.end()); i++)
-    {
-        std::string x = this->entries[j][0];
-        std::cout << j+1 << ". " << x << std::endl;
-        j++;
-    }
-    return OK;
-}
 int File::look_up_title(std::string title)
 {
     int counter = 0;
@@ -113,17 +90,24 @@ int File::look_up_word(std::string word)
     return counter;
 }
 
-bool File::print_matches()
+std::vector<std::vector<std::string>> File::get_matches()
 {
     std::cout << "Found " << this->word_matches.size() << " matches" << std::endl;
-    for ( int i = 0; i < this->word_matches.size(); i++)
+    
+    return this->word_matches;
+}
+
+std::vector<std::string> File::get_titles()
+{
+    std::vector<std::string> titles;
+    for ( int i = 0; i < this->entries.size(); i++)
     {
-        std::cout << this->word_matches[i][0] << std::endl;
-        for ( int j = 1; j < this->word_matches[i].size(); j++)
-        {
-            std::cout << "\t" << j << ". " << this->word_matches[i][j] << std::endl;
-        }
+        titles.push_back(this->entries[i][0]);
     }
-    std::cout << std::endl;
-    return OK;
+    return titles;
+}
+
+std::vector<std::vector<std::string>> File::get_all()
+{
+    return this->entries;
 }

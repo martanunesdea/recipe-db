@@ -38,13 +38,12 @@ class File {
         File(std::string in_filename, char in_delim, bool in_headers)
             : filename(in_filename), delimitor(in_delim), headers(in_headers){}
         bool set_details(std::string name, char delimitor, bool headers);
-        void set_filename(std::string name);
-        std::string get_filename();
         bool open_file();
         int look_up_word(std::string word);
         int look_up_title(std::string title);
-        bool print_matches();
-        bool print_titles();
+        std::vector<std::vector<std::string>> get_matches();
+        std::vector<std::string> get_titles();
+        std::vector<std::vector<std::string>> get_all();
 
 };
 

@@ -27,8 +27,47 @@ void get_file_details(File *file_ptr)
 
     return;
 }
+void print_titles(File *my_file)
+{
+    auto titles = my_file->get_titles();
 
+    for ( int i = 0; i < titles.size(); i++ )
+    {
+        std::cout << i+1 << ". " << titles[i] << std::endl;
+    }
+    std::cout << std::endl;
+}
 
+void print_all(File *my_file)
+{
+    auto records = my_file->get_all();
+
+    for ( int i = 0; i < records.size(); i++ )
+    {
+        auto line = records[i];
+        for ( int j = 0; j < line.size(); j++ )
+        {
+            std::cout << line[j] << " ";
+        } 
+        std::cout << "\n\n";
+    }
+
+    std::cout << std::endl;  
+
+}
+void print_matches(File *my_file)
+{
+    auto matches = my_file->get_matches();
+    for ( int i = 0; i < matches.size(); i++)
+    {
+        std::cout << matches[i][0] << std::endl;
+        for ( int j = 1; j < matches[i].size(); j++)
+        {
+            std::cout << "\t" << j << ". " << matches[i][j] << std::endl;
+        }
+    }
+    std::cout << std::endl;
+}
 void look_up_word(File *my_file)
 {
     // look up ingredient "pasta"
@@ -37,9 +76,20 @@ void look_up_word(File *my_file)
     std::cin >> ingredient;
 
     if ( my_file->look_up_word(ingredient) > 0 )
-        my_file->print_matches(); 
+        print_matches(my_file);
     else std::cout << "Sorry, no matches found\n";
 
+}
+
+void look_up_recipe(File *my_file)
+{
+    std::string recipe;
+    std::cout << "Enter the recipe name to look up: " << std::endl;
+    std::cin >> recipe;
+
+    if ( my_file->look_up_title(recipe) > 0 )
+        print_matches(my_file);
+    else std::cout << "Sorry, no matches found\n";
 }
 
 int main()
@@ -58,7 +108,7 @@ int main()
     {
         char input;
         std::cout << "\n\nPlease enter a selection from the menu: \n";
-        std::cout << "A. Print all record titles and stats\n";
+        std::cout << "A. Print all record titles\n";
         std::cout << "B. Print all record titles and details\n";
         std::cout << "C. Look up ingredient in recipes\n";
         std::cout << "D. Look up recipe\n";
@@ -70,15 +120,16 @@ int main()
         switch(input)
         {
             case 'A':
-                my_file.print_titles();
+                print_titles(&my_file);
                 break;
             case 'B':
+                print_all(&my_file);
                 break;
             case 'C':
-                look_up_word(&my_file); // fix this
+                look_up_word(&my_file);
                 break;
             case 'D':
-                // look_up_recipe(&my_file);
+                look_up_recipe(&my_file);
                 break;
             case 'E': 
                 // add new recipe
@@ -92,16 +143,5 @@ int main()
         }
                 
     }
-
-    
-
-    // look up by recipe name
-    int results = my_file.look_up_title("pesto");
-    if ( results > 0 )
-        my_file.print_matches();
-    // print all all recipes stored
-    my_file.print_titles();
-
-    
 
 }
