@@ -1,7 +1,6 @@
 /* Source file for Record class */
 #include "record.hpp"
 
-
 void Record::clear_matches()
 {
     this->word_matches = {};
@@ -10,7 +9,7 @@ void Record::clear_matches()
 bool Record::set_entries(std::vector<std::vector<std::string>> data)
 {
     this->entries = data;
-    return true;
+    return OK;
 }
 
 int Record::look_up_word(std::string word)
@@ -63,4 +62,21 @@ std::vector<std::string> Record::get_titles()
         titles.push_back(this->entries[i][0]);
     }
     return titles;
+}
+
+bool Record::add_entry(std::vector<std::string> recipe)
+{
+    this->entries.push_back(recipe);
+    return OK;
+}
+
+
+void Record::set_changed_flag(bool changes)
+{
+    this->changed = changes;
+}
+
+bool Record::get_changed_flag()
+{
+    return this->changed;
 }

@@ -56,3 +56,9 @@ std::vector<std::vector<std::string>> File::get_all()
 {
     return this->entries;
 }
+
+/* write to file 
+bool File::save_record(Record *record_ptr)
+{
+
+} */

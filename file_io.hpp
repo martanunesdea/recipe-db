@@ -37,6 +37,7 @@ class File {
         bool set_details(std::string name, char delimitor, bool headers);
         bool open_file();
         std::vector<std::vector<std::string>> get_all();
+        bool save_record(Record *record_ptr);
 
 };
 

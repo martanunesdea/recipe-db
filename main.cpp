@@ -71,7 +71,6 @@ void print_matches(Record *my_record)
 }
 void look_up_word(Record *my_record)
 {
-    // look up ingredient "pasta"
     std::string ingredient;
     std::cout << "Enter an ingredient to look up in recipe list: " << std::endl;
     std::cin >> ingredient;
@@ -92,6 +91,47 @@ void look_up_recipe(Record *my_record)
         print_matches(my_record);
     else std::cout << "Sorry, no matches found\n";
 }
+
+void add_new_recipe(Record *record_ptr)
+{
+    std::string recipe_title;
+    std::vector<std::string> recipe;
+
+    std::cout << "Enter the recipe name to enter: " << std::endl;
+    std::cin >> recipe_title;
+    recipe.push_back(recipe_title);
+    
+    char exit = false;
+    std::string ingredient;
+    while ( exit == false)
+    {
+        std::cout << "Enter ingredient name or enter Q to quit: " << std::endl;
+        std::cin >> ingredient;
+        if ( ingredient == "Q" || ingredient == "q" ) exit = true;
+        recipe.push_back(ingredient);
+    }
+
+    if ( record_ptr->add_entry(recipe) != OK )
+    {
+        std::cout << "Error committing new changes...\n";
+    }
+    else {
+        std::cout << "New recipe added.\n";
+    }
+
+    record_ptr->set_changed_flag(true);
+    
+}
+
+void save_changes(Record *record_ptr, File *file_ptr)
+{
+    if ( record_ptr->get_changed_flag() )
+    {
+        file_ptr->save_record(record_ptr);
+    }
+}
+
+
 
 int main()
 {
@@ -140,11 +180,13 @@ int main()
                 break;
             case 'E': 
                 // add new recipe
+                add_new_recipe(&my_record);
                 break;
             case 'F':
                 // edit recipe
                 break;
             case 'Q':
+                save_changes(&my_record, &my_file);
                 std::cout << "Quitting...\n\n";
                 return 0;
         }
