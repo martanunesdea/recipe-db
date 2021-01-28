@@ -101,13 +101,15 @@ void add_new_recipe(Record *record_ptr)
     std::cin >> recipe_title;
     recipe.push_back(recipe_title);
     
-    char exit = false;
     std::string ingredient;
-    while ( exit == false)
+    while ( true )
     {
         std::cout << "Enter ingredient name or enter Q to quit: " << std::endl;
         std::cin >> ingredient;
-        if ( ingredient == "Q" || ingredient == "q" ) exit = true;
+        if ( ingredient == "Q" || ingredient == "q" )
+        {
+            break;
+        }
         recipe.push_back(ingredient);
     }
 
@@ -135,7 +137,6 @@ void save_changes(Record *record_ptr, File *file_ptr)
 
 int main()
 {
-    // std::string filename = get_user_filename();
     File my_file;
     get_file_details(&my_file);
     Record my_record;
@@ -160,7 +161,6 @@ int main()
         std::cout << "C. Look up ingredient in recipes\n";
         std::cout << "D. Look up recipe\n";
         std::cout << "E. Add recipe\n";
-        std::cout << "F. Edit recipe\n";
         std::cout << "Q. Quit\n";
         std::cin >> input;
         
@@ -179,11 +179,7 @@ int main()
                 look_up_recipe(&my_record);
                 break;
             case 'E': 
-                // add new recipe
                 add_new_recipe(&my_record);
-                break;
-            case 'F':
-                // edit recipe
                 break;
             case 'Q':
                 save_changes(&my_record, &my_file);

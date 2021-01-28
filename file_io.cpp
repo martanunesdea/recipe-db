@@ -70,7 +70,7 @@ bool File::save_record(Record *record_ptr)
         std::vector<std::string> x = entries[i];
         for ( int j = 0; j < x.size(); j++)
         {
-            file << entries[i][j] << " ";
+            file << entries[i][j] << this->delimitor;
         }
         file << "\n";
     }
