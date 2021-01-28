@@ -80,3 +80,8 @@ bool Record::get_changed_flag()
 {
     return this->changed;
 }
+
+std::vector<std::vector<std::string>> Record::get_all()
+{
+    return this->entries;
+}

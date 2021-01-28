@@ -12,11 +12,13 @@
 #include <fstream>
 #include <vector> 
 #include <string>
+#include "record.hpp"
+
+#define OK      true
+#define NOK     false
 
 std::string set_name(std::string filename);
 
-const bool OK = true;
-const bool NOK = false;
 
 class File {
     private:

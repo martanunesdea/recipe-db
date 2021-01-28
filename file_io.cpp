@@ -4,6 +4,7 @@
 #include <iostream>
 #include <istream> // for getline
 #include <sstream> // for istringstream
+#include <fstream>
 #include "file_io.hpp"
 
 bool File::set_details(std::string name, char delimitor, bool headers)
@@ -57,8 +58,22 @@ std::vector<std::vector<std::string>> File::get_all()
     return this->entries;
 }
 
-/* write to file 
+/* write to file */ 
 bool File::save_record(Record *record_ptr)
 {
+    std::vector<std::vector<std::string>> entries = record_ptr->get_all();
+    std::ofstream file;
+    file.open(this->filename);
 
-} */
+    for ( int i = 0; i < entries.size(); i++ )
+    {
+        std::vector<std::string> x = entries[i];
+        for ( int j = 0; j < x.size(); j++)
+        {
+            file << entries[i][j] << " ";
+        }
+        file << "\n";
+    }
+    file.close();
+    return OK; 
+}
