@@ -6,25 +6,29 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
+#include "entry.hpp"
 
 #define OK  true
 #define NOK false
 
+typedef std::string word;
+typedef std::string title;
+
 class Record {
     private: 
-        std::vector<std::vector<std::string>> entries;
-        std::vector<std::vector<std::string>> word_matches;
+        std::vector<Entry> entries;
+        std::vector<Entry> word_matches;
         void clear_matches();
         bool changed;
 
     public:
-        bool set_entries(std::vector<std::vector<std::string>>);
-        int look_up_word(std::string word);
-        int look_up_title(std::string title);
-        std::vector<std::vector<std::string>> get_matches();
-        std::vector<std::string> get_titles();
-        std::vector<std::vector<std::string>> get_all();
-        bool add_entry(std::vector<std::string> recipe);
+        bool set_entries(std::vector<Entry>);
+        std::vector<Entry> get_entries();
+        int look_up_word(word);
+        int look_up_title(title);
+        std::vector<Entry> get_matches();
+        std::vector<title> get_titles();
+        bool add_entry(Entry recipe);
         void set_changed_flag(bool changed);
         bool get_changed_flag();
 

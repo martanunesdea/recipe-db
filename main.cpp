@@ -45,10 +45,10 @@ void print_all(File *my_file)
 
     for ( int i = 0; i < records.size(); i++ )
     {
-        auto line = records[i];
+        Entry line = records[i];
         for ( int j = 0; j < line.size(); j++ )
         {
-            std::cout << line[j] << " ";
+            std::cout << line.pos(j) << " ";
         } 
         std::cout << "\n\n";
     }
@@ -61,10 +61,10 @@ void print_matches(Record *my_record)
     auto matches = my_record->get_matches();
     for ( int i = 0; i < matches.size(); i++)
     {
-        std::cout << matches[i][0] << std::endl;
+        std::cout << matches[i].pos(0) << std::endl;
         for ( int j = 1; j < matches[i].size(); j++)
         {
-            std::cout << "\t" << j << ". " << matches[i][j] << std::endl;
+            std::cout << "\t" << j << ". " << matches[i].pos(j) << std::endl;
         }
     }
     std::cout << std::endl;
@@ -83,7 +83,7 @@ void look_up_word(Record *my_record)
 
 void look_up_recipe(Record *my_record)
 {
-    std::string recipe;
+    word recipe;
     std::cout << "Enter the recipe name to look up: " << std::endl;
     std::cin >> recipe;
 
@@ -95,11 +95,11 @@ void look_up_recipe(Record *my_record)
 void add_new_recipe(Record *record_ptr)
 {
     std::string recipe_title;
-    std::vector<std::string> recipe;
+    Entry recipe;
 
     std::cout << "Enter the recipe name to enter: " << std::endl;
     std::cin >> recipe_title;
-    recipe.push_back(recipe_title);
+    recipe.add(recipe_title);
     
     std::string ingredient;
     while ( true )
@@ -110,7 +110,7 @@ void add_new_recipe(Record *record_ptr)
         {
             break;
         }
-        recipe.push_back(ingredient);
+        recipe.add(ingredient);
     }
 
     if ( record_ptr->add_entry(recipe) != OK )

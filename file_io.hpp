@@ -13,12 +13,10 @@
 #include <vector> 
 #include <string>
 #include "record.hpp"
+#include "entry.hpp"
 
 #define OK      true
 #define NOK     false
-
-std::string set_name(std::string filename);
-
 
 class File {
     private:
@@ -26,7 +24,7 @@ class File {
         std::ifstream file_handle;
         char delimitor;
         bool headers;
-        std::vector<std::vector<std::string>> entries;
+        std::vector<Entry> entries;
         std::vector<std::string> single_entries;
         std::vector<std::string> header_row;
         std::vector<std::string> rows;
@@ -38,7 +36,7 @@ class File {
             : filename(in_filename), delimitor(in_delim), headers(in_headers){}
         bool set_details(std::string name, char delimitor, bool headers);
         bool open_file();
-        std::vector<std::vector<std::string>> get_all();
+        std::vector<Entry> get_all();
         bool save_record(Record *record_ptr);
 
 };

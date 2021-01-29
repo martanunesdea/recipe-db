@@ -27,13 +27,12 @@ bool File::open_file()
     std::string row;
     std::string entry;
     bool first_line = true;
-    int i = 0, j = 0;
     while (std::getline(file_handle, row))
     {
         this->rows.push_back(row);
         std::istringstream full_line(row);
-        entries.push_back(std::vector<std::string> ());
-
+        // entries.push_back(first_entry);
+        Entry first_entry;
         while (std::getline(full_line, entry, this->delimitor))
         {
             if (this->headers && first_line)
@@ -45,15 +44,16 @@ bool File::open_file()
             {
                 this->single_entries.push_back(entry);
             }
-            entries[i].push_back(entry);
-            j++;
+            first_entry.add(entry);
         }
-        i++;
+        entries.push_back(first_entry);
+        first_entry.clear();
+
     }
     return OK;
 }
 
-std::vector<std::vector<std::string>> File::get_all()
+std::vector<Entry> File::get_all()
 {
     return this->entries;
 }
@@ -61,16 +61,16 @@ std::vector<std::vector<std::string>> File::get_all()
 /* write to file */ 
 bool File::save_record(Record *record_ptr)
 {
-    std::vector<std::vector<std::string>> entries = record_ptr->get_all();
+    std::vector<Entry> entries = record_ptr->get_entries();
     std::ofstream file;
     file.open(this->filename);
 
     for ( int i = 0; i < entries.size(); i++ )
     {
-        std::vector<std::string> x = entries[i];
+        Entry x = entries[i];
         for ( int j = 0; j < x.size(); j++)
         {
-            file << entries[i][j] << this->delimitor;
+            file << entries[i].pos(j) << this->delimitor;
         }
         file << "\n";
     }

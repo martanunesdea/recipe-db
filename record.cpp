@@ -1,28 +1,36 @@
 /* Source file for Record class */
 #include "record.hpp"
-
+#include <cstdlib>
+#include <iostream>
 void Record::clear_matches()
 {
     this->word_matches = {};
 
 }
-bool Record::set_entries(std::vector<std::vector<std::string>> data)
+
+bool Record::set_entries(std::vector<Entry> data)
 {
     this->entries = data;
     return OK;
 }
 
-int Record::look_up_word(std::string word)
+std::vector<Entry> Record::get_entries()
+{
+    return this->entries;
+}
+
+
+int Record::look_up_word(word in_word)
 {
     this->clear_matches();
+
     int counter = 0;
-    std::vector<std::string> x;
     for ( auto i = 0; (i < this->entries.size()); i++)
     {
-        x = this->entries[i];
+        Entry x = this->entries[i];
         for ( int j = 0; j < x.size(); j++ )
         {
-            if ( word.compare(x[j]) == 0)
+            if ( in_word.compare(x.pos(j)) == 0)
             {
                 counter++;
                 this->word_matches.push_back(x);
@@ -32,24 +40,24 @@ int Record::look_up_word(std::string word)
     return counter;
 }
 
-int Record::look_up_title(std::string title)
+int Record::look_up_title(title in_title)
 {
     this->clear_matches();
     int counter = 0;
-    std::vector<std::string> x;
-    for ( auto i = 0; (i < this->entries.size()); i++ )
+    for ( auto i = 0; (i < this->entries.size()); ++i )
     {
-        x = this->entries[i];
-        if ( title.compare(x[0]) == 0)
+        Entry x = Entry(this->entries[i]);
+        if ( in_title.compare(x.pos(0)) == 0)
         {
             counter++;
+            std::cout << "found a match\n";
             this->word_matches.push_back(x);
         }
     }
     return counter;
 }
 
-std::vector<std::vector<std::string>> Record::get_matches()
+std::vector<Entry> Record::get_matches()
 {    
     return this->word_matches;
 }
@@ -59,12 +67,12 @@ std::vector<std::string> Record::get_titles()
     std::vector<std::string> titles;
     for ( int i = 0; i < this->entries.size(); i++)
     {
-        titles.push_back(this->entries[i][0]);
+        titles.push_back((this->entries[i]).pos(0));
     }
     return titles;
 }
 
-bool Record::add_entry(std::vector<std::string> recipe)
+bool Record::add_entry(Entry recipe)
 {
     this->entries.push_back(recipe);
     return OK;
@@ -79,9 +87,4 @@ void Record::set_changed_flag(bool changes)
 bool Record::get_changed_flag()
 {
     return this->changed;
-}
-
-std::vector<std::vector<std::string>> Record::get_all()
-{
-    return this->entries;
 }
