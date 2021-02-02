@@ -22,12 +22,12 @@ class Record {
         bool changed;
 
     public:
-        bool set_entries(std::vector<Entry>);
+        bool set_entries(std::vector<Entry> entries);
         std::vector<Entry> get_entries();
+        std::vector<title> get_titles();
         int look_up_word(word);
         int look_up_title(title);
         std::vector<Entry> get_matches();
-        std::vector<title> get_titles();
         bool add_entry(Entry recipe);
         void set_changed_flag(bool changed);
         bool get_changed_flag();

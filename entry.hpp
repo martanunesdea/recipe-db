@@ -19,7 +19,6 @@ class Entry {
         std::vector<std::string> entry;
         int entry_length;
 
-        
     public:
         Entry() {}
         Entry(std::vector<std::string> in_entry);

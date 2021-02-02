@@ -20,6 +20,17 @@ std::vector<Entry> Record::get_entries()
 }
 
 
+void Record::set_changed_flag(bool changes)
+{
+    this->changed = changes;
+}
+
+bool Record::get_changed_flag()
+{
+    return this->changed;
+}
+
+
 int Record::look_up_word(word in_word)
 {
     this->clear_matches();
@@ -79,12 +90,3 @@ bool Record::add_entry(Entry recipe)
 }
 
 
-void Record::set_changed_flag(bool changes)
-{
-    this->changed = changes;
-}
-
-bool Record::get_changed_flag()
-{
-    return this->changed;
-}

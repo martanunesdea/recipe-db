@@ -7,6 +7,7 @@
 #include <vector>
 #include "file_io.hpp"
 #include "record.hpp"
+#include "entry.hpp"
 
 void get_file_details(File *file_ptr)
 {
@@ -39,9 +40,9 @@ void print_titles(Record *my_record)
     std::cout << std::endl;
 }
 
-void print_all(File *my_file)
+void print_all(Record *my_record)
 {
-    auto records = my_file->get_all();
+    auto records = my_record->get_entries();
 
     for ( int i = 0; i < records.size(); i++ )
     {
@@ -170,7 +171,7 @@ int main()
                 print_titles(&my_record);
                 break;
             case 'B':
-                print_all(&my_file);
+                print_all(&my_record);
                 break;
             case 'C':
                 look_up_word(&my_record);
