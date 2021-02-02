@@ -38,6 +38,11 @@ void Entry::add(std::string word)
     this->entry.push_back(word);
 }
 
+void Entry::erase(std::string ingredient)
+{
+   this->entry.erase(std::remove(this->entry.begin(), this->entry.end(), ingredient), this->entry.end());
+}
+
 void Entry::clear()
 {
     this->entry = {};

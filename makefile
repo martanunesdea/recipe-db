@@ -17,4 +17,4 @@ test: file_io_tests.o file_io.o record.o entry.o
 	$(CC) $(CFLAGS) -o test file_io_tests.o file_io.o record.o entry.o
 
 clean:
-	rm -f *.o *.h.gch main
+	rm -f *.o *.hpp.gch *.h.gch main

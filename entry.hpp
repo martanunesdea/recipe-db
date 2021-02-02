@@ -28,6 +28,7 @@ class Entry {
         int size();
         std::string pos(int position);
         void add(std::string word);
+        void erase(std::string ingredient);
         bool print();
         void clear();
 

@@ -126,6 +126,77 @@ void add_new_recipe(Record *record_ptr)
     
 }
 
+void remove_ingredient(Entry *recipe)
+{
+    std::string ingredient;
+    std::cout << "Enter the name of ingredient to remove: \n";
+    std::cin >> ingredient;
+    
+    for ( int i = 0; i < recipe->size(); ++i)
+    {
+        if ( ingredient.compare(recipe->pos(i))  == 0 )
+        {
+            recipe->erase(ingredient);
+        }
+    }
+}
+
+void add_ingredient(Entry *recipe)
+{
+    std::string ingredient;
+    std::cout << "Enter the name of ingredient to add: \n";
+    std::cin >> ingredient;
+    recipe->add(ingredient);
+}
+
+void replace_ingredient(Entry *recipe)
+{
+    remove_ingredient(recipe);
+    add_ingredient(recipe);
+}
+
+
+void edit_recipe(Record *record_ptr)
+{
+    std::string recipe;
+    std::cout << "Enter the name of recipe to edit, or enter L for a prompt of all recipes\n";
+    std::cin >> recipe;
+
+    if ( recipe == "L" || recipe == "l" )
+    {
+        print_titles(record_ptr);
+        std::cout << "Enter the name of recipe to edit\n";
+        std::cin >> recipe;
+    }
+    else {
+        if ( record_ptr->look_up_title(recipe) == 1 )
+        {
+            char option;
+            Entry recipe_item = record_ptr->get_matches().at(0);
+            std::cout << "Select option that applies: \n";
+            std::cout << "A. Removing existing ingredient\n";
+            std::cout << "B. Adding new ingredient\n";
+            std::cout << "C. Replacing existing ingredient with new one\n";
+            std::cin >> option;
+            switch(option)
+            {
+                case 'A':
+                    remove_ingredient(&recipe_item);
+                    break;
+                case 'B':
+                    add_ingredient(&recipe_item);
+                    break;
+                case 'C':
+                    replace_ingredient(&recipe_item);
+                    break;
+            }
+            record_ptr->update_entry(recipe_item);
+
+        }
+        else std::cout << "Sorry, no matches found\n";
+    }
+}
+
 void save_changes(Record *record_ptr, File *file_ptr)
 {
     if ( record_ptr->get_changed_flag() )
@@ -162,6 +233,7 @@ int main()
         std::cout << "C. Look up ingredient in recipes\n";
         std::cout << "D. Look up recipe\n";
         std::cout << "E. Add recipe\n";
+        std::cout << "F. Edit recipe\n";
         std::cout << "Q. Quit\n";
         std::cin >> input;
         
@@ -181,6 +253,9 @@ int main()
                 break;
             case 'E': 
                 add_new_recipe(&my_record);
+                break;
+            case 'F':
+                edit_recipe(&my_record);
                 break;
             case 'Q':
                 save_changes(&my_record, &my_file);

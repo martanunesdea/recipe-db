@@ -89,4 +89,21 @@ bool Record::add_entry(Entry recipe)
     return OK;
 }
 
+bool Record::update_entry(Entry recipe)
+{
+    std::string recipe_title = recipe.pos(0);
+    bool updated = false;
+    for ( int i = 0; i < this->entries.size(); i++)
+    {
+        Entry x = Entry(this->entries[i]);
+        if ( recipe_title.compare(x.pos(0)) == 0)
+        {
+            this->entries[i] = recipe;
+            this->changed = true;
+            updated = true;
+            break;
+        }
+    }
 
+    return updated;
+}

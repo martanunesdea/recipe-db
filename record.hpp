@@ -29,8 +29,10 @@ class Record {
         int look_up_title(title);
         std::vector<Entry> get_matches();
         bool add_entry(Entry recipe);
+        bool update_entry(Entry recipe);
         void set_changed_flag(bool changed);
         bool get_changed_flag();
+
 
 
 };
