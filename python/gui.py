@@ -13,7 +13,7 @@ class Application(tk.Tk):
         self.button_load_all = ttk.Button(self, text = "Load all recipes", command = self.load_recipes)
         self.button_load_all.grid(row = 0, column = 1, padx = 5, pady = 5)
 
-        self.button_look_up_recipe = ttk.Button(self, text = "Look up by recipe")
+        self.button_look_up_recipe = ttk.Button(self, text = "Look up by recipe", command = self.lookup_recipe)
         self.button_look_up_recipe.grid(row = 0, column = 2, padx = 5, pady = 5)
 
         self.button_look_up_ingredient = ttk.Button(self, text = "Look up by ingredient")
@@ -40,19 +40,34 @@ class Application(tk.Tk):
         newWindow.geometry("800x800")
     
         tk.Label(newWindow, text ="This is a new window").pack()
-        text_entry = tk.Text(newWindow, width = 70)
+        text_entry = tk.Text(newWindow, width = 80)
         text_entry.pack()
 
         text = parser.load_recipes()
         # set_text_entry
         text_entry.insert(1.0, text)
 
-  
+    def lookup_recipe(self):
+        newWindow = tk.Toplevel(self)
+        newWindow.title("New Window")
+        newWindow.geometry("300x300")
+    
+        label = tk.Label(newWindow, text="Enter recipe name")
+        label.grid(row = 1, column = 0, padx = 5, pady = 5)
+        self.text_entry = tk.Entry(newWindow)
+        self.text_entry.grid(row = 2, column = 0, columnspan = 4, padx = 5, pady = 5)
 
-def main():
-    app = Application()
-    app.mainloop()
+        submit = tk.Button(newWindow, text="Submit",command = self.lookup)
+        submit.grid(row = 3, column = 0, padx = 5, pady = 5)
 
+        
 
-if __name__ == "__main__": main()
+    def lookup(self):
+        ingredient = self.text_entry.get()
+        new_ingredient = ingredient.strip()
+        print("Ingredient to look up:", new_ingredient)
+        result = parser.parse(new_ingredient)
+        print(result)
+        
+
 
