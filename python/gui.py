@@ -60,13 +60,17 @@ class Application(tk.Tk):
         submit = tk.Button(newWindow, text="Submit",command = self.lookup)
         submit.grid(row = 3, column = 0, padx = 5, pady = 5)
 
-        
+        self.label1 = tk.StringVar()
+        self.label1.set("")
+        self.labelbar = tk.Label(newWindow, textvariable=self.label1)
+        self.labelbar.grid(row=4, column = 0, padx = 5, pady = 5)
 
     def lookup(self):
         ingredient = self.text_entry.get()
         new_ingredient = ingredient.strip()
         print("Ingredient to look up:", new_ingredient)
         result = parser.parse(new_ingredient)
+        self.label1.set(result)
         print(result)
         
 
