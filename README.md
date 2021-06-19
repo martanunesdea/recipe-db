@@ -1,2 +1,2 @@
-# parser
-Exploratory project to process and analyse raw data efficiently
+# Recipe parser
+Exploratory project to process text data from a recipes archive.
