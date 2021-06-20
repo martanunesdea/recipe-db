@@ -14,12 +14,8 @@ def parse(ingredient):
             result = result + result1
     
     if count == 0:
-        pass
-        #result = "Couldn't find " + ingredient + " in list"
-    else:
-        pass
-        #result ="Total " + str(count) + " results found"
-
+        result = "Couldn't find " + ingredient + " in list"
+    
     f.close()
     return result
 
