@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-import parser as parser
+from .parser import parse
+from .parser import load_recipes 
+
 class Application(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -42,7 +44,7 @@ class Application(tk.Tk):
         text_entry = tk.Text(newWindow, width = 120)
         text_entry.pack()
 
-        text = parser.load_recipes()
+        text = load_recipes()
         text_entry.insert(1.0, text)
 
     def lookup(self):
@@ -64,7 +66,7 @@ class Application(tk.Tk):
         ingredient = self.text_entry.get()
         new_ingredient = ingredient.strip()
         print("Ingredient to look up:", new_ingredient)
-        result = parser.parse(new_ingredient)
+        result = parse(new_ingredient)
         self.label1.set(result)
         print(result)
         

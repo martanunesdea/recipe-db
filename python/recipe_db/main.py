@@ -1,4 +1,4 @@
-from gui import *
+from .gui import *
 import parser as parser
 
 def main():
