@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from .parser import parse
-from .parser import load_recipes 
+from .parser import parse, load_recipes, save_recipe
 
 class Application(tk.Tk):
     def __init__(self):
@@ -36,7 +35,7 @@ class Application(tk.Tk):
     
     def db_save(self):
         text = self.text_entry.get(1.0, tk.END)
-        result = parser.save_recipe(text)
+        result = save_recipe(text)
         print(result)
 
     def load_recipes(self):
