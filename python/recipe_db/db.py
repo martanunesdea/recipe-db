@@ -1,37 +1,47 @@
+import pymongo
+
 def get_database():
-    import pymongo
 
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    #CONNECTION_STRING = "mongodb+srv://cooluser:password123456789@<cluster-name>.mongodb.net/recipe-db"
+    CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
 
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    client = pymongo.MongoClient("mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority")
+    client = pymongo.MongoClient(CONNECTION_STRING)
 
-    #db = client.test
-
-    # Create the database for our example (we will use the same database throughout the tutorial
     return client['recipe-db']
     
-# This is added so that many files can reuse the function get_database()
-if __name__ == "__main__":    
+def compile_items(*args):
+    items = []
+    for item in args:
+        items.append(item)
+        print(item)
+    return items
+
+def insert_items(items):
+    dbname = get_database()
+    collection_name = dbname["recipes"]
+    collection_name.insert_many(items)
     
-    # Get the database
+def get_all_items():
     dbname = get_database()
     
     collection_name = dbname["recipes"]
-    item_1 = {
-    "_id" : "U1IT00001",
-    "item_name" : "recipe 3",
-    }
-
-    item_2 = {
-    "_id" : "U1IT00002",
-    "item_name" : "recipe 4",
-    }
-    
-    collection_name.insert_many([item_1,item_2])
-        
+   
     item_details = collection_name.find()
     for item in item_details:
         # This does not give a very readable output
         print(item)
+
+# This is added so that many files can reuse the function get_database()
+if __name__ == "__main__":  
+    item_1 = {
+    "name" : "risotto",
+    "tags": "vegeterian"
+    } 
+    item_2 = {
+    "name" : "bolognese",
+    "tags" : "beef"
+    } 
+    items = compile_items(item_1, item_2)
+    insert_items(items)
+    get_all_items()
