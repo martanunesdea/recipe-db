@@ -44,21 +44,7 @@ class Application(tk.Tk):
         text_entry.pack()
 
         text = load_recipes()
-        loc = 1.0
-        for entry in text:
-            for k, val in entry.items():
-                if k != "_id" and k != "ingredients":
-                    line = f'{k}: {val}\n'
-                    text_entry.insert(loc, line)
-                    loc = loc + 100
-                if k == "ingredients":
-                    for ing in val:
-                        line = f'\t{ing}\n'
-                        text_entry.insert(loc, line)
-                        loc += 100
-                
-
-        #text_entry.insert(1.0, text)
+        text_entry.insert(1.0, text)
 
     def lookup(self):
         newWindow = self.new_window()    
@@ -81,7 +67,6 @@ class Application(tk.Tk):
         print("Ingredient to look up:", new_ingredient)
         result = parse(new_ingredient)
         self.label1.set(result)
-        print(result)
         
 
 
