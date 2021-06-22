@@ -1,2 +1,2 @@
-# Recipe parser
-Exploratory project to process text data from a recipes archive.
+# Recipe database
+GUI to help with storing and retrieving recipes, to make meal planning easier.
