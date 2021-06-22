@@ -22,6 +22,12 @@ def insert_items(items):
     collection_name = dbname["recipes"]
     collection_name.insert_many(items)
     
+def db_insert(item):
+    dbname = get_database()
+    collection_name = dbname["recipes"]
+    ret = collection_name.insert(item)
+    print(ret)
+    
 def db_get_all():
     dbname = get_database()
     
