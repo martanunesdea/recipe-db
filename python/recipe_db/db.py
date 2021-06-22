@@ -22,26 +22,25 @@ def insert_items(items):
     collection_name = dbname["recipes"]
     collection_name.insert_many(items)
     
-def get_all_items():
+def db_get_all():
     dbname = get_database()
     
     collection_name = dbname["recipes"]
    
     item_details = collection_name.find()
-    for item in item_details:
-        # This does not give a very readable output
-        print(item)
+    #items = []
+    
+    
+    return item_details
 
-# This is added so that many files can reuse the function get_database()
-if __name__ == "__main__":  
-    item_1 = {
-    "name" : "risotto",
-    "tags": "vegeterian"
-    } 
-    item_2 = {
-    "name" : "bolognese",
-    "tags" : "beef"
-    } 
-    items = compile_items(item_1, item_2)
-    insert_items(items)
-    get_all_items()
+def get_item_by_name(in_name):
+    dbname = get_database()
+    
+    collection_name = dbname["recipes"]
+
+    res = collection_name.find( { "name": in_name } )
+    for x in res:
+        for k, val in x.items():
+            if k != "_id":
+                print(k, " ", val)
+        
