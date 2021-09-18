@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Booking system</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+      <p>Log in</p>
+    </nav>
+  </div>
+
+  {% block intro %}{% endblock %}
+
+  {% block main %}{% endblock %}
+
+  {% block script %}{% endblock %}
+
+  
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script type=text/javascript  src="{{ url_for('static', filename='jquery-3.3.1.slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+  <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+</body>
+
+</html>
