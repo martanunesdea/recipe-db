@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Details for {{ post['title'] }}{% endblock %}</h1>
+  <h1>{% block title %}Details for {{ title }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <p>Title: {{post['title'] }} </p>
-  <p class="body">{{ post['ingredients'] }}</p>
-  <p class="body">{{ post['instructions'] }}</p>
+  <p>Title: {{ title }} </p>
+  <p>{{ ingredients }}</p>
+  <p>{{ instructions }}</p>
   <hr>
 {% endblock %}

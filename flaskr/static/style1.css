@@ -49,9 +49,14 @@ html {
     padding: 0;
   }
   
-  nav ul li a, nav ul li span, header .action {
-    display: block;
+  nav ul li a, nav ul li span, nav ul li input, header .action {
+    display: inline-block;
     padding: 0.5rem;
+  }
+
+  nav ul li input {
+    padding: 0.2rem;
+    margin: 0.2rem;
   }
   
   .content {

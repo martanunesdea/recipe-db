@@ -89,9 +89,11 @@ def update(id):
 @login_required
 def view_full_details(id):
     recipe = get_post(id)
+    title = recipe["title"]
+    ingredients = recipe["ingredients"]
+    instructions = recipe["instructions"]
 
-
-    return render_template('recipes/view_full_details.html', post=recipe)
+    return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
@@ -102,3 +104,17 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('home.index'))
+
+
+@bp.route('/search/<string:query>', methods=('GET', 'POST',))
+def search(query):
+    term = request.args.get("q")
+    db = get_db()
+    print(term)
+    recipes = db.execute('SELECT * FROM post where title = ?', (term,)).fetchall()
+    db.commit()
+    #get_post(id)
+    #db = get_db()
+    #db.execute('DELETE FROM post WHERE id = ?', (id,))
+    #db.commit()
+    return render_template('recipes/search_results.html', recipes=recipes)
