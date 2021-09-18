@@ -1,7 +1,6 @@
 import pymongo
 
 def get_database():
-
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
     CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
 
@@ -25,8 +24,8 @@ def insert_items(items):
 def db_insert(item):
     dbname = get_database()
     collection_name = dbname["recipes"]
-    ret = collection_name.insert(item)
-    print(ret)
+    result = collection_name.insert(item)
+    print(result)
     
 def db_get_all():
     dbname = get_database()
@@ -43,11 +42,8 @@ def db_get_all():
                 line = f'\nTitle: {val}\n'
                 text = text + line
             if k == "ingredients":
-                line = f'Ingredients:\n'
-                text = text + line
-                for ing in val:
-                    line = f'\t{ing}\n'
-                    text = text + line
+                pass
+            # TODO check if tags is list, if so print as list
             if k == "tags":
                 line = f'Categories: {val}\n'
                 text = text + line
@@ -59,6 +55,7 @@ def db_lookup_name(in_name):
     
     collection_name = dbname["recipes"]
 
+    # TODO search with regex
     recipes = collection_name.find( { "name": in_name } )
     text = ""
     for entry in recipes:
@@ -74,7 +71,9 @@ def db_lookup_name(in_name):
                 for ing in val:
                     line = f'{ing}\n'
                     text = text + line
+            # TODO check if tags is list, if so print as list
             if k == "tags":
                 line = f'Categories: {val}\n'
                 text = text + line
+        
     return text
