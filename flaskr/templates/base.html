@@ -4,7 +4,7 @@
 <nav>
   <h1>Family recipes</h1>
   <ul>
-    <li><a href="{{ url_for('blog.index') }}">All recipes</a></li>
+    <li><a href="{{ url_for('home.index') }}">All recipes</a></li>
 
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>

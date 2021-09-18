@@ -9,14 +9,14 @@
     <label for="title">Title</label>
     <input name="title" id="title"
       value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Ingredients</label>
-    <textarea name="body" id="body">{{ request.form['ingredients'] or post['ingredients'] }}</textarea>
-    <label for="body">Instructions</label>
-    <textarea name="body" id="body">{{ request.form['instructions'] or post['instructions'] }}</textarea>
+    <label for="ingredients">Ingredients</label>
+    <textarea name="ingredients" id="ingredients">{{ request.form['ingredients'] or post['ingredients'] }}</textarea>
+    <label for="instructions">Instructions</label>
+    <textarea name="instructions" id="instructions">{{ request.form['instructions'] or post['instructions'] }}</textarea>
     <input type="submit" value="Save">
   </form>
   <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+  <form action="{{ url_for('home.delete', id=post['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
 {% endblock %}

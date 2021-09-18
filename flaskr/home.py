@@ -6,7 +6,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('home', __name__)
 
 @bp.route('/')
 def index():
@@ -16,7 +16,7 @@ def index():
         ' FROM post p JOIN user u ON p.author_id = u.id'
         ' ORDER BY created DESC'
     ).fetchall()
-    return render_template('blog/index.html', posts=recipes)
+    return render_template('recipes/index.html', posts=recipes)
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -40,9 +40,9 @@ def create():
                 (title, ingredients, instructions, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('home.index'))
 
-    return render_template('blog/create.html')
+    return render_template('recipes/create.html')
 
 def get_post(id, check_author=True):
     post = get_db().execute(
@@ -78,13 +78,12 @@ def update(id):
             flash(error)
         else:
             db = get_db()
-            db.execute(
-                
-            )
+            db.execute('UPDATE post SET title = ?, ingredients = ?, instructions = ?'
+            'WHERE id = ?', (title, ingredients, instructions, id))
             db.commit()
-            return redirect(url_for('blog.index'))
+            return redirect(url_for('home.index'))
 
-    return render_template('blog/update.html', post=recipe)
+    return render_template('recipes/update.html', post=recipe)
 
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
 @login_required
@@ -92,7 +91,7 @@ def view_full_details(id):
     recipe = get_post(id)
 
 
-    return render_template('blog/view_full_details.html', post=recipe)
+    return render_template('recipes/view_full_details.html', post=recipe)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))
@@ -102,4 +101,4 @@ def delete(id):
     db = get_db()
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('home.index'))
