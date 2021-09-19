@@ -4,18 +4,17 @@ from flask import (
 from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
-from flaskr.db import get_db
+from flaskr.db import get_db, db_get_recipes
 
 bp = Blueprint('home', __name__)
 
 @bp.route('/')
 def index():
-    db = get_db()
-    recipes = db.execute(
-        'SELECT p.id, title, ingredients, instructions, created, author_id, username'
-        ' FROM post p JOIN user u ON p.author_id = u.id'
-        ' ORDER BY created DESC'
-    ).fetchall()
+    recipes = db_get_recipes()
+    for recipe in recipes:
+        print(recipe)
+    
+    posts=[{"id": 0, "title": "recipe 1"}, {"id": 1, "title": "recipe 2"}]
     return render_template('recipes/index.html', posts=recipes)
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -86,7 +85,6 @@ def update(id):
     return render_template('recipes/update.html', post=recipe)
 
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
-@login_required
 def view_full_details(id):
     recipe = get_post(id)
     title = recipe["title"]
@@ -110,11 +108,7 @@ def delete(id):
 def search(query):
     term = request.args.get("q")
     db = get_db()
-    print(term)
     recipes = db.execute('SELECT * FROM post where title = ?', (term,)).fetchall()
     db.commit()
-    #get_post(id)
-    #db = get_db()
-    #db.execute('DELETE FROM post WHERE id = ?', (id,))
-    #db.commit()
+    
     return render_template('recipes/search_results.html', recipes=recipes)

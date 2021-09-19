@@ -1,18 +1,16 @@
-import sqlite3
+import pymongo
 import click
-from flask import current_app, g
+from flask import g
 from flask.cli import with_appcontext
 
 def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            current_app.config['DATABASE'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
+    # Provide the mongodb atlas url to connect python to mongodb using pymongo
+    CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
 
-    return g.db
+    # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
+    client = pymongo.MongoClient(CONNECTION_STRING)
 
+    return client['recipe-db']
 
 def close_db(e=None):
     db = g.pop('db', None)
@@ -21,11 +19,8 @@ def close_db(e=None):
         db.close()
 
 def init_db():
-    db = get_db()
+    pass
 
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
-    
 
 @click.command('init-db')
 @with_appcontext
@@ -37,3 +32,95 @@ def init_db_command():
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+
+def compile_items(*args):
+    items = []
+    for item in args:
+        items.append(item)
+        print(item)
+    return items
+
+def insert_items(items):
+    dbname = get_db()
+    collection_name = dbname["recipes"]
+    collection_name.insert_many(items)
+    
+def db_insert(item):
+    dbname = get_db()
+    collection_name = dbname["recipes"]
+    result = collection_name.insert(item)
+    print(result)
+    
+def db_get_all():
+    dbname = get_db()
+    
+    collection_name = dbname["recipes"]
+   
+    recipes = collection_name.find()
+    text = ""
+    for recipe in recipes:
+        for k, val in recipe.items():
+            if k == "_id":
+                pass
+            if k == "name":
+                line = f'\nTitle: {val}\n'
+                text = text + line
+            if k == "ingredients":
+                pass
+            # TODO check if tags is list, if so print as list
+            if k == "tags":
+                line = f'Categories: {val}\n'
+                text = text + line
+    return text
+   
+def db_get_recipes():
+    dbname = get_db()
+    collection_name = dbname["recipes"]
+    recipes = collection_name.find()
+    list = []
+    count = 0
+    for recipe in recipes:
+        for k, val in recipe.items():
+            if k == "_id":
+                this_id = count
+            if k == "name":
+                this_name = val
+            if k == "ingredients":
+                this_ingredients = val
+            # TODO check if tags is list, if so print as list
+            if k == "tags":
+                this_tags = val
+        entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "tags": this_tags}
+        count += 1
+        list.append(entry)
+    return list
+
+
+def db_lookup_name(in_name):
+    dbname = get_db()
+    
+    collection_name = dbname["recipes"]
+
+    # TODO search with regex
+    recipes = collection_name.find( { "name": in_name } )
+    text = ""
+    for entry in recipes:
+        for k, val in entry.items():
+            if k == "_id":
+                pass
+            if k == "name":
+                line = f'\nTitle: {val}\n'
+                text = text + line
+            if k == "ingredients":
+                line = f'Ingredients:\n'
+                text = text + line
+                for ing in val:
+                    line = f'{ing}\n'
+                    text = text + line
+            # TODO check if tags is list, if so print as list
+            if k == "tags":
+                line = f'Categories: {val}\n'
+                text = text + line
+        
+    return text
