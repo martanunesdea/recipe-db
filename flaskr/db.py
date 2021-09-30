@@ -79,11 +79,10 @@ def db_get_recipes():
     collection_name = dbname["recipes"]
     recipes = collection_name.find()
     list = []
-    count = 0
     for recipe in recipes:
         for k, val in recipe.items():
-            if k == "_id":
-                this_id = count
+            if k == "id":
+                this_id = val
             if k == "name":
                 this_name = val
             if k == "ingredients":
@@ -92,10 +91,26 @@ def db_get_recipes():
             if k == "tags":
                 this_tags = val
         entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "tags": this_tags}
-        count += 1
         list.append(entry)
     return list
 
+def db_lookup_id(id):
+    dbname = get_db()
+    collection_name = dbname["recipes"]
+    recipe = collection_name.find( { "id": id } )
+    for entry in recipe:
+        for k, val in entry.items():
+            if k == "id":
+                this_id = val
+            if k == "name":
+                this_name = val
+            if k == "ingredients":
+                this_ingredients = val
+            # TODO check if tags is list, if so print as list
+            if k == "tags":
+                this_tags = val
+        entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "tags": this_tags}
+    return entry
 
 def db_lookup_name(in_name):
     dbname = get_db()

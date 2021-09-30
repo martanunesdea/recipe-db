@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Details for {{ title }}{% endblock %}</h1>
+  <h1>{% block title %}{{ title }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-  <p>Title: {{ title }} </p>
   <p>{{ ingredients }}</p>
   <p>{{ instructions }}</p>
   <hr>

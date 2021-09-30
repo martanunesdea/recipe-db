@@ -4,7 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
-from flaskr.db import get_db, db_get_recipes
+from flaskr.db import get_db, db_get_recipes, db_lookup_id
 
 bp = Blueprint('home', __name__)
 
@@ -86,11 +86,11 @@ def update(id):
 
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
 def view_full_details(id):
-    recipe = get_post(id)
+    recipe = db_lookup_id(id)
     title = recipe["title"]
     ingredients = recipe["ingredients"]
-    instructions = recipe["instructions"]
-
+    #instructions = recipe["instructions"]
+    instructions = "instructions here"
     return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions)
 
 
