@@ -22,8 +22,8 @@ def create_app(test_config=None):
     except OSError:
         pass    
 
-    from . import db
-    db.init_app(app)
+    from . import db_sql
+    db_sql.init_app(app)
 
     from . import auth
     app.register_blueprint(auth.bp)
@@ -33,3 +33,9 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
+
+
+if __name__== "__main__":
+    db_uri = "mongodb://'127.0.0.1:27017/mydatabase"
+    app = create_app(db_uri)
+    app.run("0.0.0.0", port=5000, debug=False)

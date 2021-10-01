@@ -8,9 +8,9 @@ def get_db():
     CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
 
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    client = pymongo.MongoClient(CONNECTION_STRING)
-
-    return client['recipe-db']
+    db = pymongo.MongoClient(CONNECTION_STRING)['recipe-db']
+    
+    return db
 
 def close_db(e=None):
     db = g.pop('db', None)
