@@ -41,6 +41,13 @@ def compile_items(*args):
         print(item)
     return items
 
+def get_user(name):
+    print(name)
+    db = get_db()
+    users = db["users"]
+    user = users.find_one({ "name": name})
+    return user
+
 def insert_items(items):
     dbname = get_db()
     collection_name = dbname["recipes"]
