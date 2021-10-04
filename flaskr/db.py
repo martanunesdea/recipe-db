@@ -2,6 +2,7 @@ import pymongo
 import click
 from flask import g
 from flask.cli import with_appcontext
+from bson.objectid import ObjectId
 
 def get_db():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
@@ -9,30 +10,22 @@ def get_db():
 
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
     db = pymongo.MongoClient(CONNECTION_STRING)['recipe-db']
-    
+    #g.db = db
+
     return db
 
-def close_db(e=None):
-    db = g.pop('db', None)
-
-    if db is not None:
-        db.close()
-
-def init_db():
-    pass
 
 
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
     """Clear the existing data and create new tables."""
-    init_db()
     click.echo('Initialized the database.')
 
 def init_app(app):
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(init_db_command)
-
+    #app.teardown_appcontext(close_db)
+    #app.cli.add_command(init_db_command)
+    pass
 
 def compile_items(*args):
     items = []
@@ -42,18 +35,32 @@ def compile_items(*args):
     return items
 
 def get_user(name):
-    print(name)
     db = get_db()
     users = db["users"]
     user = users.find_one({ "name": name})
     return user
+
+def get_user_by_id(id):
+    db = get_db()
+    users = db["users"]
+    user = users.find_one({"_id": ObjectId(id)})
+    return user
+
+def register_user(user):
+    db = get_db()
+    users = db["users"]
+    result = users.insert_one({"name": user["name"], "password": user["password"], "email": user["email"]})
+    print(result)
+
+def is_email_available(email):
+    pass
 
 def insert_items(items):
     dbname = get_db()
     collection_name = dbname["recipes"]
     collection_name.insert_many(items)
     
-def db_insert(item):
+def insert_recipe(item):
     dbname = get_db()
     collection_name = dbname["recipes"]
     result = collection_name.insert(item)
@@ -86,6 +93,9 @@ def db_get_recipes():
     collection_name = dbname["recipes"]
     recipes = collection_name.find()
     list = []
+    this_name = ""
+    this_ingredients = ""
+    this_tags = ""
     for recipe in recipes:
         for k, val in recipe.items():
             if k == "id":

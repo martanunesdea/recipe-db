@@ -5,16 +5,16 @@ from werkzeug.exceptions import abort
 
 from flaskr.auth import login_required
 from flaskr.db import get_db, db_get_recipes, db_lookup_id
+import flaskr.db as db
 
 bp = Blueprint('home', __name__)
 
 @bp.route('/')
 def index():
     recipes = db_get_recipes()
-    for recipe in recipes:
-        print(recipe)
+    #for recipe in recipes:
+        #print(recipe)
     
-    posts=[{"id": 0, "title": "recipe 1"}, {"id": 1, "title": "recipe 2"}]
     return render_template('recipes/index.html', posts=recipes)
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -32,13 +32,8 @@ def create():
         if error is not None:
             flash(error)
         else:
-            db = get_db()
-            db.execute(
-                'INSERT INTO post (title, ingredients, instructions, author_id)'
-                ' VALUES (?, ?, ?, ?)',
-                (title, ingredients, instructions, g.user['id'])
-            )
-            db.commit()
+            recipe = {'title': title, 'ingredients': ingredients, 'instructions': instructions}
+            db.insert_recipe(recipe)
             return redirect(url_for('home.index'))
 
     return render_template('recipes/create.html')

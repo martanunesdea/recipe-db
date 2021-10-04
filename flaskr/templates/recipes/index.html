@@ -13,7 +13,7 @@
             <h1>{{ post['title'] }}</h1>
           </a>
         </div>
-        {% if g.user['id'] == post['author_id'] %}
+        {% if g.user['id'] == post['author_id']  %}
           <a class="action" href="{{ url_for('home.update', id=post['id']) }}">Edit</a>
         {% endif %}
       </header>
