@@ -1,18 +1,18 @@
-import pymongo
 import click
-from flask import g
+from flask import g, app
 from flask.cli import with_appcontext
 from bson.objectid import ObjectId
+from flask_pymongo import PyMongo
 
 def get_db():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
-
+    #CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    db = pymongo.MongoClient(CONNECTION_STRING)['recipe-db']
+    #db = pymongo.MongoClient(CONNECTION_STRING)['recipe-db']
     #g.db = db
+    pymongo = PyMongo(app)
 
-    return db
+    return pymongo.db.recipes
 
 
 
