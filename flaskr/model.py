@@ -1,23 +1,56 @@
 # FastAPI's jsonable_encoder handles converting various non-JSON types,
 # such as datetime between JSON types and native Python types.
+import re
 from fastapi.encoders import jsonable_encoder
-
 # Pydantic, and Python's built-in typing are used to define a schema
 # that defines the structure and types of the different objects stored
 # in the recipes collection, and managed by this API.
-from pydantic import BaseModel, Field
-from typing import List, Optional
-from datetime import datetime
+from typing import List
 
-from .objectid import PydanticObjectId
+class User():
+    def __init__(self, form):
+        self.email = form["email"]
+        self.password = form["password"]
+        self.name = form["username"]
+    
+    def complete(self):
+        if self.name == "":
+            return False
+        elif self.email == "":
+            return False
+        elif self.password == "":
+            return False
+        else:
+            return True
 
+def register_user(form):
+    user = {
+        "email": form["email"],
+        "password": form["password"],
+        "name": form["username"]
+    }
+    validate_user(user, email=True)
+    return user
 
-class User(BaseModel):
-    name: str
-    password: str
+def login_user(form):
+    user = {
+        "email": form["email"],
+        "password": form["password"],
+        "name": form["username"]
+    }
+    validate_user(user, email=False)
+    return user
 
-class Recipe(BaseModel):
-    id: Optional[PydanticObjectId] = Field(None, alias="_id")
+def validate_user(user, email=False):
+    if user["name"] == "":
+        return False
+    if user["password"] == "":
+        return False
+    if user["email"] == "" and email == True:
+        return False
+
+class Recipe():
+    id: int
     name: str
     ingredients: List[str]
 

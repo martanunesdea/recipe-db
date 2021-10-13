@@ -12,10 +12,8 @@ bp = Blueprint('home', __name__)
 @bp.route('/')
 def index():
     recipes = db_get_recipes()
-    #for recipe in recipes:
-        #print(recipe)
-    
     return render_template('recipes/index.html', posts=recipes)
+
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
@@ -97,7 +95,6 @@ def delete(id):
     db.execute('DELETE FROM post WHERE id = ?', (id,))
     db.commit()
     return redirect(url_for('home.index'))
-
 
 @bp.route('/search/<string:query>', methods=('GET', 'POST',))
 def search(query):

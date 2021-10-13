@@ -3,20 +3,19 @@ import tempfile
 
 import pytest
 from flaskr import create_app
-from flaskr.db import init_db
+from flaskr.db import init_app
+TEST_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db-test?retryWrites=true&w=majority'
 
 @pytest.fixture
 def app():
     db_fd, db_path = tempfile.mkstemp()
-    db_path = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db-test?retryWrites=true&w=majority'
 
     app = create_app({
-        'TESTING': True,
-        'DATABASE': db_path,
+        "MONGOURI": TEST_URI,
     })
 
     with app.app_context():
-        init_db()
+        init_app()
 
     yield app
 

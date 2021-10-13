@@ -4,15 +4,16 @@ from flask.cli import with_appcontext
 from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
 
+import pymongo as pymongo
 def get_db():
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
-    #CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
+    CONNECTION_STRING = "mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority"
     # Create a connection using MongoClient. You can import MongoClient or use pymongo.MongoClient
-    #db = pymongo.MongoClient(CONNECTION_STRING)['recipe-db']
+    db = pymongo.MongoClient(CONNECTION_STRING)['recipe-db']
     #g.db = db
-    pymongo = PyMongo(app)
+    #pymongo = PyMongo(app)
 
-    return pymongo.db.recipes
+    return db
 
 
 
@@ -23,9 +24,10 @@ def init_db_command():
     click.echo('Initialized the database.')
 
 def init_app(app):
+    db = PyMongo(app)
+    return db
     #app.teardown_appcontext(close_db)
     #app.cli.add_command(init_db_command)
-    pass
 
 def compile_items(*args):
     items = []
@@ -49,11 +51,13 @@ def get_user_by_id(id):
 def register_user(user):
     db = get_db()
     users = db["users"]
-    result = users.insert_one({"name": user["name"], "password": user["password"], "email": user["email"]})
+    result = users.insert_one({"name": user["name"], "password": user["password"], "email": user["password"]})
     print(result)
 
 def is_email_available(email):
     pass
+
+
 
 def insert_items(items):
     dbname = get_db()
