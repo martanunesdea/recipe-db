@@ -5,33 +5,23 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flaskr.db import get_db
 import flaskr.db as db
-
+from .user import register_user, login_user
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
-        user = {"name": request.form["username"], 
-            "password": request.form["password"],
-            "email": request.form["email"]}
+        user = register_user(request.form)
         error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif not email:
-            error = 'Email is required.'
+        
+        if user == False:
+            error = 'Missing details'
         elif db.is_email_available(user["email"]) == False:
-            error = 'Email {} is already registered.'.format(email)
+            error = 'Email {} is already registered.'.format(user.email)
 
         if error is None:
-            db.register_user(user)
+            db.add_user(user)
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -41,14 +31,13 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        user = db.get_user(username)
+        login_user(request.form)
+        user = db.get_user_by_name(request.form['name'])
 
         error = None
         if user is None:
             error = 'Incorrect username.'
-        elif check_password_hash(user['password'], password):
+        elif check_password_hash(user['password'], request.form['password']):
             error = 'Incorrect password.'
 
         if error is None:
