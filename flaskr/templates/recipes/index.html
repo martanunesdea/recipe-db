@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block content %}
-  {% for post in posts %}
+  {% for recipe in recipes %}
     <article class="post">
       <header>
         <div>
-          <a class="action" href="{{ url_for('home.view_full_details', id=post['id']) }}">    
-            <h1>{{ post['title'] }}</h1>
+          <a class="action" href="{{ url_for('home.view_full_details', id=recipe['id']) }}">    
+            <h1>{{ recipe['title'] }}</h1>
           </a>
         </div>
-        {% if g.user['id'] == post['author_id']  %}
-          <a class="action" href="{{ url_for('home.update', id=post['id']) }}">Edit</a>
+        {% if g.user['id'] == recipe['author_id']  %}
+          <a class="action" href="{{ url_for('home.update', id=recipe['id']) }}">Edit</a>
         {% endif %}
       </header>
     </article>

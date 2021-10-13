@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 import flaskr.db as db
-from .model import register_user, login_user
+from .user import register_user, login_user
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))
@@ -21,7 +21,7 @@ def register():
             error = 'Email {} is already registered.'.format(user.email)
 
         if error is None:
-            db.register_user(user)
+            db.add_user(user)
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -31,13 +31,13 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        user = login_user(request.form)
-        user = db.get_user(username)
+        login_user(request.form)
+        user = db.get_user_by_name(request.form['name'])
 
         error = None
         if user is None:
             error = 'Incorrect username.'
-        elif check_password_hash(user['password'], password):
+        elif check_password_hash(user['password'], request.form['password']):
             error = 'Incorrect password.'
 
         if error is None:

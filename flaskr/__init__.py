@@ -25,8 +25,9 @@ def create_app(test_config=None):
     except OSError:
         pass  
 
-    from . import db
-    db.init_app(app)
+    
+    #db.init_app(app)
+    db = PyMongo(app, uri=app.config["URI"])
 
     from . import auth
     app.register_blueprint(auth.bp)
