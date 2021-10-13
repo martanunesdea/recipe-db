@@ -17,3 +17,24 @@ class Config:
     TEMPLATES_FOLDER = 'templates'
     MONGO_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
     URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
+
+
+class ProdConfig(Config):
+    FLASK_ENV = 'production'
+    DEBUG = False
+    TESTING = False
+    DATABASE_URI = environ.get('PROD_DATABASE_URI')
+
+
+class DevConfig(Config):
+    FLASK_ENV = 'development'
+    DEBUG = True
+    TESTING = False
+    DATABASE_URI = environ.get('DEV_DATABASE_URI')
+
+class TestConfig(Config):
+    FLASK_ENV = 'development'
+    DEBUG = True
+    TESTING = True
+   # DATABASE_URI = environ.get('DEV_DATABASE_URI')
+    MONGO_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db-test?retryWrites=true&w=majority'

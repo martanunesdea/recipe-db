@@ -15,7 +15,7 @@ def app():
     })
 
     with app.app_context():
-        init_app()
+        init_app(app)
 
     yield app
 
