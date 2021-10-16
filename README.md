@@ -1,18 +1,39 @@
-# booking_app
-This repository was designed to create a booking system, stored on a database server. The end goal is to connect this system with a front-end web application for ease of use of the booking system.
+# Recipe DB 
+This repository aims to create an interface that allows an user to browse through recipes and find recipes by the ingredients contained within them.
 
-The user requirements for this booking system may change over time, but the scope of this project will include:
+The user requirements for this digital recipe cookbook may change over time, but the scope of this project will include:
 
-- Keeping a calendar
-- Having the concept of **a collection of timeslots** within the calendar. These timeslots may have two **states**: **available** or **fully booked**/**not available.**
-- The timeslots become "not available" once they have reached a **maximum booking capacity**.
-- Having the concept of **client** **user** and **admin user**, where admin is the person that creates, deletes and views the timeslots and user is the person that views and books timeslots.
-- The **admin** may **set** or **edit** the **maximum booking capacity** of the timeslots, which will in turn change the **state** of the timeslot. In this project it will be out of scope for admin users to add new properties to the timeslots.
-- The calendar must be printed out somewhere.
+
+- Keeping a collection of recipes, visible to anyone.
+- To create a recipe, a user must register and login.
+- To create a recipe, it must have a **title**, a set of **ingredients**, and a set of **instructions**. Otherwise, the creation of the recipe is not successful.
+- Upon creation, the user may view the full details of the recipe.
+- Upon creation, the author may edit the contents of the recipe.
+- Search recipe by name
+- Search recipe by ingredient
+- Regex search.
 
 New points to build on:
+- Recipe recommendation system
+- Have a "favourite" recipes page
+- Have a "reduce waste" recommendation system
 
-- The calendar must be shown on a webpage.
-- Both type of users require authentication to access the booking system.
-- The booking system will notify the timeslot **creator** (ie. an admin user) when a timeslot was booked.
-- Allow admin users to add properties to the timeslots created.
+## Stack
+The project is run with Flask as the back-end server and MongoDB as the database engine.
+
+## Project structure
+The main app is inside the folder "Flaskr". It contains
+- "static" folder: For css and js files
+- "templates" folder: For html files
+     - base.html: Base HTML template used in the other templates
+     - "auth" folder: HTML files for the authentication pages
+     - "recipes" folder: HTML files for the recipe interface pages
+- __init__.py - starting point for the app
+- auth.py - blueprint responsible for authentication routes
+- home.py - blueprint responsible for the recipe-interface routes
+- recipe.py - middleware that interacts with db.py for DB tasks
+- user.py - middleware that interacts with db.py for authentication DB tasks
+- db.py - file responsible of managing the DB interactions
+
+The "tests" folder contains the tests.
+The "config.py" file in the main directory contains the different configurations used for development and testing.
