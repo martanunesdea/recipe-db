@@ -46,7 +46,7 @@ def db_lookup_id(id):
     return get_db()["recipes"].find( { "id": id } )
 
 def db_lookup_name(in_name):
-    recipes = get_db()["recipes"].find( { "name": in_name } )
+    recipes = get_db("recipes").find( { "name": in_name } )
     return recipes
     
 def insert_recipe(item):
@@ -56,14 +56,16 @@ def insert_recipe(item):
     print(result)
 
 def db_update(id, title, ingredients, instructions):
-    # run MongoDB update command
-    # return result
-    pass
+    result = get_db()["recipes"].update_one({"id": id}, {"$set": {"id": id, "title": title, "ingredients": ingredients, "instructions": instructions}})
+    print(result)
+    return result
 
 def db_delete(id):
-    # run MongoDB delete command
-    # return
-    pass
+    result = get_db()["recipes"].delete_one({"id": id})
+    if result.deleted_count == 1: 
+        return True
+    else:
+        return False
 
 
     

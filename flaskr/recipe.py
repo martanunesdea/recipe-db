@@ -24,18 +24,19 @@ class Recipe():
 
 def recipe_lookup_id(id):
     unformatted_recipe = db_lookup_id(id)
-    for entry in unformatted_recipe:
-        for k, val in entry.items():
+    for field in unformatted_recipe:
+        for k, val in field.items():
             if k == "id":
                 this_id = val
             if k == "name" or k == "title":
                 this_name = val
             if k == "ingredients":
                 this_ingredients = val
-            # TODO check if tags is list, if so print as list
+            if k == "instructions":
+                this_instructions = val
             if k == "tags":
                 this_tags = val
-        entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "tags": this_tags}
+        entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}
     return entry
 
 def recipe_get_titles():
@@ -66,10 +67,10 @@ def recipe_add(form):
 
 def recipe_full_details(id):
     recipe = recipe_lookup_id(id)
+    print(recipe)
     title = recipe["title"]
     ingredients = recipe["ingredients"]
-    #instructions = recipe["instructions"]
-    instructions = "instructions here"
+    instructions = recipe["instructions"]
      
     return title, ingredients, instructions
 
@@ -84,8 +85,10 @@ def recipe_update(id, form):
     return
 
 def recipe_delete(id):
-    db_delete(id)
-    return
+    if db_delete(id):
+        return
+    else:
+        return "Could not delete"
 
 def recipe_lookup_name(name):
     recipes = db_lookup_name(name)
@@ -103,7 +106,12 @@ def recipe_lookup_name(name):
                 for ing in val:
                     line = f'{ing}\n'
                     text = text + line
-            # TODO check if tags is list, if so print as list
+            if k == "instructions":
+                line = f'Instructions:\n'
+                text = text + line
+                for inst in val:
+                    line = f'{inst}\n'
+                    text = text + line
             if k == "tags":
                 line = f'Categories: {val}\n'
                 text = text + line

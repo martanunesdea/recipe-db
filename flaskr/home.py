@@ -27,21 +27,22 @@ def create():
     return render_template('recipes/create.html')
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
+@login_required
 def update(id):
     recipe = recipe_lookup_id(id)
 
     if request.method == 'POST':
         error = recipe_update(id, request.form)
         if error is None:
-            return redirect(url_for('home.index'))
+            return redirect(url_for('home.view_full_details', id=id))
         else:
             flash(error)
     
     return render_template('recipes/update.html', post=recipe)
 
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
+@login_required
 def view_full_details(id):
-    # Missing error capturing here
     title, ingredients, instructions = recipe_full_details(id)
     return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions)
 
@@ -49,9 +50,12 @@ def view_full_details(id):
 @bp.route('/<int:id>/delete', methods=('POST',))
 @login_required
 def delete(id):
-    # Missing error capturing here
-    recipe_delete(id)
-    return redirect(url_for('home.index'))
+    error = recipe_delete(id)
+    if error is None:
+        return redirect(url_for('home.index'))
+    else: 
+        flash(error)
+        return redirect(url_for('home.view_full_details', id=id))
 
 @bp.route('/search/<string:query>', methods=('GET', 'POST',))
 def search(query):
