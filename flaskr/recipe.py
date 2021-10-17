@@ -24,6 +24,7 @@ class Recipe():
 
 def recipe_lookup_id(id):
     unformatted_recipe = db_lookup_id(id)
+    this_tags = ""
     for field in unformatted_recipe:
         for k, val in field.items():
             if k == "id":
@@ -67,7 +68,6 @@ def recipe_add(form):
 
 def recipe_full_details(id):
     recipe = recipe_lookup_id(id)
-    print(recipe)
     title = recipe["title"]
     ingredients = recipe["ingredients"]
     instructions = recipe["instructions"]
@@ -117,3 +117,26 @@ def recipe_lookup_name(name):
                 text = text + line
         
     return text
+
+def recipe_search(terms):
+    unformatted_recipe = db_lookup_name(terms)
+    print(unformatted_recipe)
+    this_ingredients = ""
+    this_instructions = ""
+    this_tags = ""
+
+    for field in unformatted_recipe:
+        for k, val in field.items():
+            if k == "id":
+                this_id = val
+            if k == "name" or k == "title":
+                this_name = val
+                print(this_name)
+            if k == "ingredients":
+                this_ingredients = val
+            if k == "instructions":
+                this_instructions = val
+            if k == "tags":
+                this_tags = val
+        entry = [{"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}]
+    return entry

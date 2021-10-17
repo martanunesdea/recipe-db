@@ -46,7 +46,7 @@ def db_lookup_id(id):
     return get_db()["recipes"].find( { "id": id } )
 
 def db_lookup_name(in_name):
-    recipes = get_db("recipes").find( { "name": in_name } )
+    recipes = get_db()["recipes"].find( { "title": in_name } )
     return recipes
     
 def insert_recipe(item):
