@@ -6,7 +6,7 @@ from fastapi.encoders import jsonable_encoder
 # that defines the structure and types of the different objects stored
 # in the recipes collection, and managed by this API.
 from typing import List
-from flaskr.db import db_get_recipes, db_lookup_name, insert_recipe, db_lookup_id, db_delete, db_update
+from flaskr.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update
 
 class Recipe():
     id: int
@@ -22,8 +22,11 @@ class Recipe():
             data.pop("_id", None)
         return data
 
-def recipe_lookup_id(id):
-    unformatted_recipe = db_lookup_id(id)
+def format_raw_recipe(unformatted_recipe):
+    this_id = ""
+    this_name = ""
+    this_ingredients = ""
+    this_instructions = ""
     this_tags = ""
     for field in unformatted_recipe:
         for k, val in field.items():
@@ -39,6 +42,10 @@ def recipe_lookup_id(id):
                 this_tags = val
         entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}
     return entry
+
+def recipe_lookup_id(id):
+    raw_recipe = db_lookup("id", id)
+    return format_raw_recipe(raw_recipe)
 
 def recipe_get_titles():
     recipes = db_get_recipes()
@@ -63,7 +70,7 @@ def recipe_add(form):
         return('Missing required information.')
     
     recipe = {'title': title, 'ingredients': ingredients, 'instructions': instructions}
-    insert_recipe(recipe)
+    db_insert_recipe(recipe)
     return
 
 def recipe_full_details(id):
@@ -91,7 +98,7 @@ def recipe_delete(id):
         return "Could not delete"
 
 def recipe_lookup_name(name):
-    recipes = db_lookup_name(name)
+    recipes = db_lookup("name", name)
     text = ""
     for entry in recipes:
         for k, val in entry.items():
@@ -119,24 +126,7 @@ def recipe_lookup_name(name):
     return text
 
 def recipe_search(terms):
-    unformatted_recipe = db_lookup_name(terms)
-    print(unformatted_recipe)
-    this_ingredients = ""
-    this_instructions = ""
-    this_tags = ""
+    recipe = db_lookup("name", terms)
+    return format_raw_recipe(recipe)
 
-    for field in unformatted_recipe:
-        for k, val in field.items():
-            if k == "id":
-                this_id = val
-            if k == "name" or k == "title":
-                this_name = val
-                print(this_name)
-            if k == "ingredients":
-                this_ingredients = val
-            if k == "instructions":
-                this_instructions = val
-            if k == "tags":
-                this_tags = val
-        entry = [{"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}]
-    return entry
+

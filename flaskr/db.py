@@ -3,9 +3,10 @@ from bson.objectid import ObjectId
 from flask_pymongo import PyMongo
 
 def get_db():
-    pymongo = PyMongo(current_app)
-    g.db = pymongo.db
-    return pymongo.db
+    if 'db' not in g:
+        pymongo = PyMongo(current_app)
+        g.db = pymongo.db
+    return g.db
 
 def init_app(app):
     db = PyMongo(app, uri=app.config["URI"])
@@ -14,27 +15,29 @@ def init_app(app):
 ###############
 #### USERS ####
 ###############
-def get_user_by_name(name):
+def db_get_user(n, param):
     db = get_db()
     users = db["users"]
-    user = users.find_one({ "name": name})
+    if n == "_id":
+        user = users.find_one({ n: ObjectId(param)})
+    else:
+        user = users.find_one({ n: param})
+    # note that user is None if no results were found
     return user
 
-def get_user_by_id(id):
+def db_add_user(user):
     db = get_db()
     users = db["users"]
-    user = users.find_one({"_id": ObjectId(id)})
-    return user
+    result = users.insert_one({"name": user["name"], "password": user["password"], "email": user["email"]})
+    return True
 
-def add_user(user):
+def db_is_email_available(email):
     db = get_db()
     users = db["users"]
-    result = users.insert_one({"name": user["name"], "password": user["password"], "email": user["password"]})
-    print(result)
-
-def is_email_available(email):
-    pass
-
+    if users.find_one({"email": email}) is not None:
+        return False
+    else:
+        return True
 
 ###############
 ### RECIPES ###
@@ -42,14 +45,10 @@ def is_email_available(email):
 def db_get_recipes():
     return  get_db()["recipes"].find()
 
-def db_lookup_id(id):
-    return get_db()["recipes"].find( { "id": id } )
-
-def db_lookup_name(in_name):
-    recipes = get_db()["recipes"].find( { "title": in_name } )
-    return recipes
+def db_lookup(param, input_param):
+    return get_db()["recipes"].find( {param: input_param})
     
-def insert_recipe(item):
+def db_insert_recipe(item):
     dbname = get_db()
     collection_name = dbname["recipes"]
     result = collection_name.insert(item)

@@ -6,46 +6,39 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 import flaskr.db as db
-from .user import register_user, login_user
+from .user import user_validate, user_register, user_authenticate, user_login, user_get_user_by_id
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
-        user = register_user(request.form)
-        error = None
-        
-        if user == False:
-            error = 'Missing details'
-        elif db.is_email_available(user["email"]) == False:
-            error = 'Email {} is already registered.'.format(user.email)
+        error = user_validate(request.form)
 
         if error is None:
-            db.add_user(user)
+            user_register(request.form)
             return redirect(url_for('auth.login'))
-
-        flash(error)
-
+        else:
+            error = 'Details are incorrect.'
+            flash(error)
+            
     return render_template('auth/register.html')
 
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+    
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        login_user(request.form)
-        user = db.get_user_by_name(request.form['name'])
+        user = user_authenticate(request.form)
 
-        error = None
-        if user is None:
-            error = 'Incorrect username.'
-        elif check_password_hash(user['password'], request.form['password']):
-            error = 'Incorrect password.'
-
-        if error is None:
-            session.clear()
-            session['user_id'] = str(user['_id'])
-            return redirect(url_for('home.index'))
-
-        flash(error)
+        if user:
+            user_login(user)
+            return redirect(url_for('index'))
+        else:
+            error = 'Something went wrong'
+            flash(error)  
 
     return render_template('auth/login.html')
 
@@ -56,14 +49,9 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = db.get_user_by_id("6157722763181cd3e83dedc8")
-        if g.user is None:
+        g.user = user_get_user_by_id(user_id)
+        if g.user is False:
             print("Warning: User ID is None!")
-
-@bp.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
 
 def login_required(view):
     @functools.wraps(view)
