@@ -4,7 +4,7 @@ from flask import (
 )
 
 from .user import user_validate, user_register, user_authenticate, user_login, user_get_user_by_id
-
+from app.forms import LoginForm
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))
@@ -28,17 +28,18 @@ def logout():
     
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
-    if request.method == 'POST':
+    form = LoginForm()
+    if form.validate_on_submit():
         user = user_authenticate(request.form)
-
         if user:
             user_login(user)
             return redirect(url_for('index'))
         else:
             error = 'Something went wrong'
-            flash(error)  
+            flash(error)
+            return redirect(url_for('/index'))
 
-    return render_template('auth/login.html')
+    return render_template('auth/login.html', title='Sign In', form=form)
 
 @bp.before_app_request
 def load_logged_in_user():
