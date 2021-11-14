@@ -1,13 +1,13 @@
 # Recipe DB 
-This repository aims to create an interface that allows an user to browse through recipes and find recipes by the ingredients contained within them.
+This repository aims to create a user interface to browse through a collection of recipes. The advantage it brings is to find recipes not only by their name, but also by ingredients or text contained within the recipe (e.g. style of cooking, dinner or lunch recipes, number of servings, etc.). 
 
 The user requirements for this digital recipe cookbook may change over time, but the scope of this project will include:
 
 
 - Keeping a collection of recipes, visible to anyone.
+- Authentication system, to register and login users who may want to create or add their recipes.
 - To create a recipe, a user must register and login.
 - To create a recipe, it must have a **title**, a set of **ingredients**, and a set of **instructions**. Otherwise, the creation of the recipe is not successful.
-- Upon creation, the user may view the full details of the recipe.
 - Upon creation, the author may edit the contents of the recipe.
 - Search recipe by name
 - Search recipe by ingredient
@@ -37,3 +37,10 @@ The main app is inside the folder "Flaskr". It contains
 
 The "tests" folder contains the tests.
 The "config.py" file in the main directory contains the different configurations used for development and testing.
+
+
+## MongodDB structure
+MongoDB is used as the database solution, because it provides more flexibility when it comes to storing varying amounts of text for the "ingredients" and "instructions. 
+The Mongo database instance was generated on Mongo Atlas, and two collections were created: "users" and "recipes".
+- "users" collection: Designed to store the email, username and password hashes. 
+- "recipes" collection: Design to store the details of the recipes. Currently, it doesn't store the author id or author name, although this could be implemented in the future.
