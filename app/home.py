@@ -3,8 +3,8 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
+from app.auth import login_required
+from app.db import get_db
 from .recipe import recipe_get_titles, recipe_add, recipe_full_details
 from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search
 bp = Blueprint('home', __name__)

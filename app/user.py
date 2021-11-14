@@ -8,8 +8,6 @@ from typing import List
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flaskr.recipe import recipe_update
-
 from .db import db_is_email_available, db_add_user, db_get_user
 
 def user_validate(form):

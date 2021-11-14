@@ -1,5 +1,5 @@
 import pytest
-from flaskr import db
+from app import db
 
 def test_get_recipe():
     response = db.db_get_recipes()

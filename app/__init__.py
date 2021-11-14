@@ -1,31 +1,18 @@
-import os
 from flask import Flask
+from flask_pymongo import PyMongo
 from config import *
 
-from flask_pymongo import PyMongo
-from pymongo.errors import DuplicateKeyError
-
-
-URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
-
+# create and configure the app
 def create_app(test_config=None):
-    # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
 
     if test_config is None:
-        # load the instance config, if it exists, when not testing
+        # load the normal "dev" config
         app.config.from_object('config.Config')
     else:
-        # load the test config if passed in
+        # load the "test" config
         app.config.from_object('config.TestConfig')
 
-    # ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass  
-
-    
     #db.init_app(app)
     db = PyMongo(app, uri=app.config["URI"])
 
@@ -40,6 +27,4 @@ def create_app(test_config=None):
 
 
 if __name__== "__main__":
-    #db_uri = "mongodb://'127.0.0.1:27017/mydatabase"
     app = create_app()
-    #app.run("0.0.0.0", port=5000, debug=False)

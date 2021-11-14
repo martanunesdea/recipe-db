@@ -6,7 +6,7 @@ from fastapi.encoders import jsonable_encoder
 # that defines the structure and types of the different objects stored
 # in the recipes collection, and managed by this API.
 from typing import List
-from flaskr.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update
+from app.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update
 
 class Recipe():
     id: int

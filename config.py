@@ -11,8 +11,7 @@ class Config:
 
     FLASK_ENV = 'development'
     TESTING = True
-    #SECRET_KEY = environ.get('SECRET_KEY')
-    SECRET_KEY = 'aWFWElcdñfl123CWelxjewdejxnc'
+    SECRET_KEY = environ.get('SECRET_KEY') or 'aWFWElcdñfl123CWelxjewdejxnc'
     STATIC_FOLDER = 'static'
     TEMPLATES_FOLDER = 'templates'
     MONGO_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'

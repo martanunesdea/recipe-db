@@ -1,9 +1,6 @@
-import os
-import tempfile
-
 import pytest
-from flaskr import create_app
-from flaskr.db import init_app
+from app import create_app
+from app.db import init_app
 from flask_pymongo import PyMongo
 
 TEST_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db-test?retryWrites=true&w=majority'
