@@ -53,9 +53,8 @@ def db_insert_recipe(item):
     collection_name = dbname["recipes"]
     last_id = collection_name.find_one(sort=[("id", -1)])["id"]
     item["id"] = last_id + 1
-
-    result = collection_name.insert(item)
-    print(result)
+    collection_name.insert(item)
+    
 
 def db_update(id, title, ingredients, instructions):
     result = get_db()["recipes"].update_one({"id": id}, {"$set": {"id": id, "title": title, "ingredients": ingredients, "instructions": instructions}})

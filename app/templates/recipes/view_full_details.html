@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block content %}
-  <p>{{ ingredients }}</p>
-  <p>{{ instructions }}</p>
+  <h2>Ingredients:</h2>
+  {% for ingredient in ingredients %}
+    <p>{{ ingredient }}</p>
+  {% endfor %}
+  <h2>Instructions:</h2>
+  {% for instruction in instructions %}
+    <p>{{ instruction }}</p>
+  {% endfor %}
   <hr>
 {% endblock %}

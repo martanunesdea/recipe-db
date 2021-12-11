@@ -28,6 +28,7 @@ def format_raw_recipe(unformatted_recipe):
     this_ingredients = ""
     this_instructions = ""
     this_tags = ""
+    entry = dict()
     for field in unformatted_recipe:
         for k, val in field.items():
             if k == "id":
@@ -78,7 +79,10 @@ def recipe_full_details(id):
     title = recipe["title"]
     ingredients = recipe["ingredients"]
     instructions = recipe["instructions"]
-     
+    # Prepare for display
+    ingredients = ingredients.split('\n')
+    instructions = instructions.split('\n')
+
     return title, ingredients, instructions
 
 def recipe_update(id, form):
