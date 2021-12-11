@@ -37,14 +37,14 @@ def login():
         else:
             error = 'Something went wrong'
             flash(error)
-            return redirect(url_for('/index'))
+            return redirect(url_for('index'))
 
     return render_template('auth/login.html', title='Sign In', form=form)
 
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
-
+    
     if user_id is None:
         g.user = None
     else:

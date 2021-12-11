@@ -8,6 +8,7 @@ from app.db import get_db
 from .recipe import recipe_get_titles, recipe_add, recipe_full_details
 from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search
 bp = Blueprint('home', __name__)
+from app.forms import PostForm
 
 @bp.route('/')
 def index():
@@ -18,14 +19,29 @@ def index():
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
-    if request.method == 'POST':
-        error = recipe_add(request.form)
+    form = PostForm()
+
+    if form.validate_on_submit():
+        error = recipe_add(form.data)
+        #post = Post(body=form.post.data, author=current_user)
+        #db.session.add(post)
+        #db.session.commit()
         if error is None:
+            flash('Your post is now live!')
             return redirect(url_for('home.index'))
         else:
             flash(error)
+        # return redirect(url_for('index'))
 
-    return render_template('recipes/create.html')
+    #if request.method == 'POST':
+        #error = recipe_add(request.form)
+        #if error is None:
+        #    return redirect(url_for('home.index'))
+        #else:
+        #    flash(error)
+    
+
+    return render_template('recipes/create.html', form=form)
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required

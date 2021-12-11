@@ -51,6 +51,9 @@ def db_lookup(param, input_param):
 def db_insert_recipe(item):
     dbname = get_db()
     collection_name = dbname["recipes"]
+    last_id = collection_name.find_one(sort=[("id", -1)])["id"]
+    item["id"] = last_id + 1
+
     result = collection_name.insert(item)
     print(result)
 

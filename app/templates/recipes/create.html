@@ -5,13 +5,19 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required>
-    <label for="ingredients">Ingredients</label>
-    <textarea name="ingredients" id="ingredients">{{ request.form['ingredients'] }}</textarea>
-    <label for="ingredients">Instructions</label>
-    <textarea name="instructions" id="instructions">{{ request.form['instructions'] }}</textarea>
-    <input type="submit" value="Save">
+  <form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.title.label }}<br>
+      {{ form.title(cols=10, rows=8) }}<br>
+      {{ form.ingredients.label }}<br>
+      {{ form.ingredients(cols=110, rows=8) }}<br>
+      {{ form.instructions.label }}<br>
+      {{ form.instructions(cols=110, rows=8) }}<br>
+      {% for error in form.title.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
   </form>
 {% endblock %}

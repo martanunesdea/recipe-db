@@ -13,8 +13,8 @@ def create_app(test_config=None):
         # load the "test" config
         app.config.from_object('config.TestConfig')
 
-    #db.init_app(app)
-    db = PyMongo(app, uri=app.config["URI"])
+    #init_app(app)
+    # db = PyMongo(app, uri=app.config["URI"])
 
     from . import auth
     app.register_blueprint(auth.bp)
