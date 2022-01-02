@@ -5,14 +5,14 @@ from werkzeug.exceptions import abort
 
 from app.auth import login_required
 from app.db import get_db
-from .recipe import recipe_get_titles, recipe_add, recipe_full_details
+from .recipe import recipe_get_all, recipe_add, recipe_get_one
 from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search
 bp = Blueprint('home', __name__)
 from app.forms import PostForm
 
 @bp.route('/')
 def index():
-    recipes = recipe_get_titles()
+    recipes = recipe_get_all()
     return render_template('recipes/index.html', recipes=recipes)
 
 
@@ -59,7 +59,7 @@ def update(id):
 
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
 def view_full_details(id):
-    title, ingredients, instructions = recipe_full_details(id)
+    title, ingredients, instructions = recipe_get_one(id)
     return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions)
 
 
