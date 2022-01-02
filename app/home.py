@@ -4,7 +4,6 @@ from flask import (
 from werkzeug.exceptions import abort
 
 from app.auth import login_required
-from app.db import get_db
 from .recipe import recipe_get_all, recipe_add, recipe_get_one
 from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search
 bp = Blueprint('home', __name__)
@@ -23,24 +22,12 @@ def create():
 
     if form.validate_on_submit():
         error = recipe_add(form.data)
-        #post = Post(body=form.post.data, author=current_user)
-        #db.session.add(post)
-        #db.session.commit()
         if error is None:
             flash('Your post is now live!')
             return redirect(url_for('home.index'))
         else:
             flash(error)
-        # return redirect(url_for('index'))
-
-    #if request.method == 'POST':
-        #error = recipe_add(request.form)
-        #if error is None:
-        #    return redirect(url_for('home.index'))
-        #else:
-        #    flash(error)
     
-
     return render_template('recipes/create.html', form=form)
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
