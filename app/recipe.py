@@ -1,36 +1,19 @@
+from app.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update, db_text_search
 
-# FastAPI's jsonable_encoder handles converting various non-JSON types,
-# such as datetime between JSON types and native Python types.
-from fastapi.encoders import jsonable_encoder
-# Pydantic, and Python's built-in typing are used to define a schema
-# that defines the structure and types of the different objects stored
-# in the recipes collection, and managed by this API.
-from typing import List
-from app.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update
 
-class Recipe():
-    id: int
-    name: str
-    ingredients: List[str]
+def format(cursor):
 
-    def to_json(self):
-        return jsonable_encoder(self, exclude_none=True)
+    return
 
-    def to_bson(self):
-        data = self.dict(by_alias=True, exclude_none=True)
-        if data.get("_id") is None:
-            data.pop("_id", None)
-        return data
 
-def format_raw_recipe(unformatted_recipe):
+def parse(recipe):
     this_id = ""
     this_name = ""
     this_ingredients = ""
     this_instructions = ""
     this_tags = ""
     entry = dict()
-    for field in unformatted_recipe:
-        for k, val in field.items():
+    for k, val in recipe.items():
             if k == "id":
                 this_id = val
             if k == "name" or k == "title":
@@ -41,12 +24,33 @@ def format_raw_recipe(unformatted_recipe):
                 this_instructions = val
             if k == "tags":
                 this_tags = val
-        entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}
+    
+    entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}
+    
     return entry
+
+def format_recipes(cursor, single):
+    if single == True:
+        for recipe in cursor:
+            result = parse(recipe)
+    else:
+        result = list()
+        for recipe in cursor:
+            result.append(parse(recipe))
+    
+    return result
+
+def format_many_raw_recipes(cursor):
+    results = list()
+    for recipe in cursor:
+        parsed_recipe = parse(recipe)
+        results.append(parsed_recipe)
+
+    return results
 
 def recipe_lookup_id(id):
     raw_recipe = db_lookup("id", id)
-    return format_raw_recipe(raw_recipe)
+    return format_recipes(raw_recipe, single=True)
 
 def recipe_get_titles():
     recipes = db_get_recipes()
@@ -130,7 +134,13 @@ def recipe_lookup_name(name):
     return text
 
 def recipe_search(terms):
-    recipe = db_lookup("name", terms)
-    return format_raw_recipe(recipe)
+    recipes = db_text_search(terms)
+    if len(recipes) < 0:
+        res = 0
+    else:
+        res = format_recipes(recipes, single=False)
+
+    print(res)
+    return res
 
 

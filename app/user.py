@@ -1,10 +1,3 @@
-# FastAPI's jsonable_encoder handles converting various non-JSON types,
-# such as datetime between JSON types and native Python types.
-from fastapi.encoders import jsonable_encoder
-# Pydantic, and Python's built-in typing are used to define a schema
-# that defines the structure and types of the different objects stored
-# in the recipes collection, and managed by this API.
-from typing import List
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 

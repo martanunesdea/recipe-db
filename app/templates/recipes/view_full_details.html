@@ -6,12 +6,16 @@
 
 {% block content %}
   <h2>Ingredients:</h2>
+  <ol>
   {% for ingredient in ingredients %}
-    <p>{{ ingredient }}</p>
+    <li>{{ ingredient }}</li>
   {% endfor %}
+  </ol>
   <h2>Instructions:</h2>
+  <ol>
   {% for instruction in instructions %}
-    <p>{{ instruction }}</p>
+    <li>{{ instruction }}</li>
   {% endfor %}
+  </ol>
   <hr>
 {% endblock %}

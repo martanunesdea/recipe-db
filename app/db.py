@@ -46,8 +46,18 @@ def db_get_recipes():
     return  get_db()["recipes"].find()
 
 def db_lookup(param, input_param):
-    return get_db()["recipes"].find( {param: input_param})
-    
+    results = list()
+    for doc in get_db()["recipes"].find( {param: input_param}):
+        results.append(doc)
+    return results
+
+def db_text_search(input_param):
+    results = list()
+    for doc in get_db()["recipes"].find({"$text": {"$search": input_param}}) :
+        results.append(doc)
+    return results
+
+
 def db_insert_recipe(item):
     dbname = get_db()
     collection_name = dbname["recipes"]
