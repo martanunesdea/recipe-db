@@ -2,41 +2,23 @@ from app.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_up
 
 # Utilities
 def parse(recipe):
-    this_id = ""
-    this_name = ""
-    this_ingredients = ""
-    this_instructions = ""
-    this_tags = ""
-    entry = dict()
-    for k, val in recipe.items():
-            if k == "id":
-                this_id = val
-            if k == "name" or k == "title":
-                this_name = val
-            if k == "ingredients":
-                this_ingredients = val
-            if k == "instructions":
-                this_instructions = val
-            if k == "tags":
-                this_tags = val
-    
-    entry = {"id": this_id, "title": this_name, "ingredients": this_ingredients, "instructions": this_instructions, "tags": this_tags}
-    
-    return entry
+    recipe_fields = ['id', 'title', 'ingredients', 'instructions']
+    recipe = dict(zip(recipe_fields, recipe))
+    return recipe
 
 def format_recipes(cursor, single):
     if single == True:
-        for recipe in cursor:
-            result = parse(recipe)
+        result = parse(cursor)
     else:
         result = list()
-        for recipe in cursor:
-            result.append(parse(recipe))
-    
+        for item in cursor:       
+            recipe = parse(item)
+            result.append((recipe))
+
     return result
 
 def recipe_lookup_id(id):
-    raw_recipe = db_lookup("id", id)
+    raw_recipe = db_lookup("recipes", "id", id)
     return format_recipes(raw_recipe, single=True)
 
 # CRUD operations
