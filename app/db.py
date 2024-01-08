@@ -60,24 +60,20 @@ def db_lookup(table, param, input_param):
     record = get_db().execute(query, (input_param,)).fetchone()
     return record
 
+#TODO: def db_insert (table, list_params, input_params)
+
 ###############
 #### USERS ####
 ###############
 def db_get_user(n, param):
-    db = get_db()
-    users = db["users"]
-    if n == "_id":
-        user = users.find_one({ n: ObjectId(param)})
-    else:
-        user = users.find_one({ n: param})
-    # note that user is None if no results were found
+    user = db_lookup ("users", n, param)
     return user
 
 def db_add_user(user):
     db = get_db()
-    users = db["users"]
-    result = users.insert_one({"name": user["name"], "password": user["password"], "email": user["email"]})
-    return True
+    query = "INSERT INTO users (username, password, email) VALUES (?, ?, ?);"
+    db.cursor().execute(query, (user["name"], user["password"], user["email"]))
+    db.commit()
 
 def db_is_email_available(email):
     db = get_db()
