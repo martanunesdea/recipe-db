@@ -9,11 +9,12 @@ def user_validate(form):
         "password": form["password"],
         "name": form["username"]
     }
+    """
     if user_details_correct(user) == False:
         return False
     if db_is_email_available(user["email"]) == False:
         return False
-
+    """
     return
 
 def user_register(form):
@@ -36,7 +37,7 @@ def user_authenticate(form):
         return None
         
     # inputs are OK, let's check if user exists...    
-    user = db_get_user("name", input["name"])
+    user = db_get_user("username", input["name"])
     if user is None:
         print("Couldn't get user")
         return None
@@ -53,7 +54,7 @@ def user_check_password(user, input_password):
     
 def user_login(user):
     session.clear()
-    session['user_id'] = str(user['_id'])
+    session['user_id'] = str(user['id'])
 
 def user_details_correct(user):
     if user["name"] == "":
@@ -64,4 +65,4 @@ def user_details_correct(user):
         return False
 
 def user_get_user_by_id(user_id):
-    return db_get_user("_id", (user_id))
+    return db_get_user("id", (user_id))
