@@ -1,19 +1,3 @@
-"""
-from flask import g, current_app
-from bson.objectid import ObjectId
-from flask_pymongo import PyMongo
-
-def get_db():
-    if 'db' not in g:
-        pymongo = PyMongo(current_app)
-        g.db = pymongo.db
-    return g.db
-
-def init_app(app):
-    db = PyMongo(app, uri=app.config["URI"])
-    return db
-"""
-
 import sqlite3
 import click
 from flask import current_app, g
@@ -28,7 +12,6 @@ def get_db():
         g.db.row_factory = sqlite3.Row
 
     return g.db
-
 
 def close_db(e=None):
     db = g.pop('db', None)
@@ -95,30 +78,33 @@ def db_get_recipes():
     return  recipes
 
 def db_text_search(input_param):
-    results = list()
-    for doc in get_db()["recipes"].find({"$text": {"$search": input_param}}) :
-        results.append(doc)
+    results = search_string_in_table ("recipes", input_param)
     return results
+
+def search_string_in_table(table_name, search_string):
+    query = f"SELECT * FROM {table_name} WHERE title LIKE ? OR ingredients LIKE ? OR instructions LIKE ? OR tags LIKE ?;"
+    records = get_db().execute(query, ('%' + search_string + '%','%' + search_string + '%','%' + search_string + '%','%' + search_string + '%')).fetchall()
+    return records
 
 
 def db_insert_recipe(item):
     db = get_db()
-    query = "INSERT INTO recipes (title, ingredients, instructions) VALUES (?, ?, ?);"
-    db.cursor().execute(query, (item["title"], item["ingredients"], item["instructions"]))
+    query = "INSERT INTO recipes (title, ingredients, instructions, tags) VALUES (?, ?, ?, ?);"
+    db.cursor().execute(query, (item["title"], item["ingredients"], item["instructions"], item["tags"]))
     db.commit()
        
 
 def db_update(id, title, ingredients, instructions):
-    result = get_db()["recipes"].update_one({"id": id}, {"$set": {"id": id, "title": title, "ingredients": ingredients, "instructions": instructions}})
-    print(result)
-    return result
+    db = get_db()
+    query = f"UPDATE recipes SET ingredients = ?, instructions = ? WHERE title = ?;"
+    val = (ingredients, instructions, title)
+    db.cursor().execute(query, val)
+    db.commit()
 
 def db_delete(id):
-    result = get_db()["recipes"].delete_one({"id": id})
-    if result.deleted_count == 1: 
-        return True
-    else:
-        return False
-
-
+    db = get_db()
+    query = f"DELETE FROM recipes WHERE id = ?;"
+    db.cursor().execute(query, (id,))
+    db.commit()
+    return True
     

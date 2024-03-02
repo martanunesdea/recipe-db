@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% block search %}
+<div class="search-container">
+  <form action="{{ url_for('home.search', query='search') }}" method="get">
+    <input type="search" placeholder="Search" name="q" class="search-input">
+    <button type="submit" class="search-button">Search</button>
+  </form> 
+</div>
+{% endblock %}
 
 {% block header %}
   <h1>{% block title %}All recipes{% endblock %}</h1>

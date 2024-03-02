@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
+{% block filters %}
+<div class="filter-section">
+  <div class="filter-buttons">
+    <p class="filter-non-tag">Filters</p>
+    {% for filter_word in filter_words %}
+      <a href="{{ url_for('home.filter_recipes', filter=filter_word) }}" class="filter-button">{{ filter_word }}</a>
+    {% endfor %}
+    <a href="{{ url_for('home.filter_recipes', filter="reset") }}" class="filter-non-tag">Reset filters</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block search %}
+<div class="search-container">
+  <form action="{{ url_for('home.search', query='search') }}" method="get">
+    <input type="search" placeholder="Search" name="q" class="search-input">
+    <button type="submit" class="search-button">Search</button>
+  </form> 
+</div>
+{% endblock %}
 
 {% block header %}
-  <h1>{% block title %}All recipes{% endblock %}</h1>
+  <h1>{% block title %}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
+  <div class="recipe-list">
   {% for recipe in recipes %}
     <article class="post">
       <header>
@@ -13,13 +34,12 @@
             <h1>{{ recipe['title'] }}</h1>
           </a>
         </div>
-        {% if g.user['id'] == recipe['author_id']  %}
           <a class="action" href="{{ url_for('home.update', id=recipe['id']) }}">Edit</a>
-        {% endif %}
       </header>
     </article>
     {% if not loop.last %}
       <hr>
     {% endif %}
   {% endfor %}
+  </div>
 {% endblock %}

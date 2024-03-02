@@ -10,12 +10,12 @@ class Config:
     """Set Flask config variables."""
 
     FLASK_ENV = 'development'
-    TESTING = True
+    TESTING = False
     SECRET_KEY = environ.get('SECRET_KEY') or 'aWFWElcdñfl123CWelxjewdejxnc'
     STATIC_FOLDER = 'static'
     TEMPLATES_FOLDER = 'templates'
-    MONGO_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
-    URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
+    #MONGO_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
+    #URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db?retryWrites=true&w=majority'
 
 
 class ProdConfig(Config):

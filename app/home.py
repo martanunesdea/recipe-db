@@ -5,14 +5,15 @@ from werkzeug.exceptions import abort
 
 from app.auth import login_required
 from .recipe import recipe_get_all, recipe_add, recipe_get_one
-from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search
+from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search, recipe_get_popular_tags
 bp = Blueprint('home', __name__)
 from app.forms import PostForm
 
 @bp.route('/')
 def index():
     recipes = recipe_get_all()
-    return render_template('recipes/index.html', recipes=recipes)
+    tags = recipe_get_popular_tags()
+    return render_template('recipes/index.html', recipes=recipes, filter_words=tags)
 
 
 @bp.route('/create', methods=('GET', 'POST'))
@@ -30,6 +31,18 @@ def create():
     
     return render_template('recipes/create.html', form=form)
 
+
+@bp.route('/filter_recipes/<string:filter>')
+def filter_recipes(filter):
+    if filter == "reset":
+        recipes = recipe_get_all()
+    else:
+        recipes = recipe_search(filter, by_tag=True)
+    
+    tags = recipe_get_popular_tags()
+    return render_template('recipes/index.html', recipes=recipes, filter_words=tags)
+
+
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 @login_required
 def update(id):
@@ -46,8 +59,8 @@ def update(id):
 
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
 def view_full_details(id):
-    title, ingredients, instructions = recipe_get_one(id)
-    return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions)
+    title, ingredients, instructions, tags = recipe_get_one(id)
+    return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions, tags=tags)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))

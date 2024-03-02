@@ -11,9 +11,11 @@
       {{ form.title.label }}<br>
       {{ form.title(cols=10, rows=8) }}<br>
       {{ form.ingredients.label }}<br>
-      {{ form.ingredients(cols=110, rows=8) }}<br>
+      {{ form.ingredients(cols=110, rows=8, maxlength=2000) }}<br>
       {{ form.instructions.label }}<br>
-      {{ form.instructions(cols=110, rows=8) }}<br>
+      {{ form.instructions(cols=110, rows=8, maxlength=2000) }}<br>
+      {{ form.tags.label }}<br>
+      {{ form.tags(cols=20, rows=10) }}<br>
       {% for error in form.title.errors %}
         <span style="color: red;">[{{ error }}]</span>
       {% endfor %}

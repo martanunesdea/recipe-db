@@ -6,7 +6,8 @@ CREATE TABLE recipes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT NOT NULL,
   ingredients TEXT NOT NULL,
-  instructions TEXT NOT NULL
+  instructions TEXT NOT NULL,
+  tags TEXT NOT NULL
 );
 
 CREATE TABLE ingredients (
@@ -21,14 +22,3 @@ CREATE TABLE users (
   password TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL
 );
-
-INSERT INTO recipes (title, ingredients, instructions) 
-VALUES ('testname', 'testingredients', 'testinstructions');
-
-
-INSERT INTO recipes (title, ingredients, instructions) 
-VALUES ('test2', 'ingre2', 'instr2');
-
-
-INSERT INTO recipes (title, ingredients, instructions) 
-VALUES ('testname', 'testingredients', 'testinstructions');

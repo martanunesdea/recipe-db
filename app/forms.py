@@ -14,8 +14,10 @@ class PostForm(FlaskForm):
     title = StringField('Title', validators=[
         DataRequired(), Length(min=1, max=120)])
     ingredients = TextAreaField('Ingredients', validators=[
-        DataRequired(), Length(min=3, max=500)])
+        DataRequired(), Length(min=3, max=2000)])
     instructions = TextAreaField('Instructions', validators=[
+        DataRequired(), Length(min=3, max=2000)])
+    tags = StringField('Tags', validators=[
         DataRequired(), Length(min=3, max=500)])
     submit = SubmitField('Submit')
 

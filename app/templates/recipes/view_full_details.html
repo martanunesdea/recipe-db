@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% block search %}
+<div class="search-container">
+  <form action="{{ url_for('home.search', query='search') }}" method="get">
+    <input type="search" placeholder="Search" name="q" class="search-input">
+    <button type="submit" class="search-button">Search</button>
+  </form> 
+</div>
+{% endblock %}
 
 {% block header %}
   <h1>{% block title %}{{ title }}{% endblock %}</h1>
@@ -8,7 +16,7 @@
   <h2>Ingredients:</h2>
   <ol>
   {% for ingredient in ingredients %}
-    <li>{{ ingredient }}</li>
+    <ul>{{ ingredient }}</ul>
   {% endfor %}
   </ol>
   <h2>Instructions:</h2>
@@ -16,6 +24,12 @@
   {% for instruction in instructions %}
     <li>{{ instruction }}</li>
   {% endfor %}
+  </ol>
+  <h2>Tags:</h2>
+  <ol>
+    {% for tag in tags %}
+    <li>{{ tag }}</li>
+    {% endfor %}
   </ol>
   <hr>
 {% endblock %}
