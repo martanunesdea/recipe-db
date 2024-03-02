@@ -60,7 +60,7 @@ def update(id):
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
 def view_full_details(id):
     title, ingredients, instructions, tags = recipe_get_one(id)
-    return render_template('recipes/view_full_details.html', title=title, ingredients=ingredients, instructions=instructions, tags=tags)
+    return render_template('recipes/view_full_details.html', id=id, title=title, ingredients=ingredients, instructions=instructions, tags=tags)
 
 
 @bp.route('/<int:id>/delete', methods=('POST',))

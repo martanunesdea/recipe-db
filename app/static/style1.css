@@ -5,7 +5,7 @@ html {
   }
   
   body {
-    max-width: 960px;
+    max-width: 90%;
     margin: 0 auto;
     background: white;
   }
@@ -194,4 +194,55 @@ html {
   /* Optional: Hover effect */
   .search-button:hover {
     background-color: #2980b9;
+  }
+
+  nav {
+    background-color: #349bdb;;
+    color: #555;
+    padding: 10px 0;
+  }
+  
+  nav h1 {
+    margin: 0;
+    padding: 0 20px;
+  }
+  nav a {
+    color: white;
+  }
+  nav ul {
+    list-style-type: none;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  nav ul li a:hover {
+    background-color: #555;
+  }
+
+  .recipe-title {
+    margin: 0.5rem;
+    background-color: #349bdb;
+    background-blend-mode: soft-light;
+    border-radius: 5px;
+  }
+
+  .recipe-title a {
+    text-decoration: none;
+  }
+
+  .recipe-title p {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5em;
   }

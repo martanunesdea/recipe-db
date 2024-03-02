@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block content %}
+  <a class="action" href="{{ url_for('home.update', id=id) }}">Edit</a>
   <h2>Ingredients:</h2>
   <ol>
   {% for ingredient in ingredients %}

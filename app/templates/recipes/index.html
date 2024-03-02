@@ -29,16 +29,14 @@
   {% for recipe in recipes %}
     <article class="post">
       <header>
-        <div>
+        <div class="recipe-title">
           <a class="action" href="{{ url_for('home.view_full_details', id=recipe['id']) }}">    
-            <h1>{{ recipe['title'] }}</h1>
+            <p>{{ recipe['title'] }}</p>
           </a>
         </div>
-          <a class="action" href="{{ url_for('home.update', id=recipe['id']) }}">Edit</a>
       </header>
     </article>
     {% if not loop.last %}
-      <hr>
     {% endif %}
   {% endfor %}
   </div>

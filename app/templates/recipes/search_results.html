@@ -16,9 +16,9 @@
   {% for recipe in recipes %}
     <article class="post">
       <header>
-        <div>
+        <div class="recipe-title">
           <a class="action" href="{{ url_for('home.view_full_details', id=recipe['id']) }}">    
-            <h1>{{ recipe['title'] }}</h1>
+            <p>{{ recipe['title'] }}</p>
           </a>
         </div>
         {% if g.user['id'] == recipe['author_id'] %}
