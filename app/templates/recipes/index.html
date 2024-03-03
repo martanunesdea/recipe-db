@@ -8,16 +8,16 @@
     {% endfor %}
     <a href="{{ url_for('home.filter_recipes', filter="reset") }}" class="filter-non-tag">Reset filters</a>
   </div>
-</div>
-{% endblock %}
 
-{% block search %}
-<div class="search-container">
-  <form action="{{ url_for('home.search', query='search') }}" method="get">
-    <input type="search" placeholder="Search" name="q" class="search-input">
-    <button type="submit" class="search-button">Search</button>
-  </form> 
+  <div class="search-container">
+    <form action="{{ url_for('home.search', query='search') }}" method="get">
+      <input type="search" placeholder="Search" name="q" class="search-input">
+      <button type="submit" class="search-button">Search</button>
+    </form> 
+  </div>
 </div>
+
+
 {% endblock %}
 
 {% block header %}
@@ -27,17 +27,14 @@
 {% block content %}
   <div class="recipe-list">
   {% for recipe in recipes %}
-    <article class="post">
-      <header>
-        <div class="recipe-title">
-          <a class="action" href="{{ url_for('home.view_full_details', id=recipe['id']) }}">    
-            <p>{{ recipe['title'] }}</p>
-          </a>
-        </div>
-      </header>
-    </article>
-    {% if not loop.last %}
-    {% endif %}
+    <div class="recipe-title">
+      <a class="action" href="{{ url_for('home.view_full_details', id=recipe['id']) }}">    
+        <p>{{ recipe['title'] }}</p>
+      </a>
+    </div>
+  {% if not loop.last %}
+  <hr>
+  {% endif %}
   {% endfor %}
   </div>
 {% endblock %}

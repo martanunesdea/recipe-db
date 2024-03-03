@@ -77,5 +77,5 @@ def delete(id):
 def search(query):
     term = request.args.get("q")
     recipes = recipe_search(term)
-
-    return render_template('recipes/search_results.html', recipes=recipes)
+    tags = recipe_get_popular_tags()
+    return render_template('recipes/index.html', recipes=recipes, filter_words=tags)

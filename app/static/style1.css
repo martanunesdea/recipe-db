@@ -1,3 +1,11 @@
+:root {
+  --primary-color: rgb(221, 165, 109);
+  --headings-color: #353434;
+  --secondary-color: #ddac75b3;
+  --font-colr:#121212;
+  --border-color: #b4a7a7;
+  --hover-color: #f0f0f0;
+}
 html {
     font-family: sans-serif;
     background: #eee;
@@ -12,7 +20,7 @@ html {
   
   h1, h2, h3, h4, h5, h6 {
     font-family: sans-serif;
-    color: #377ba8;
+    color: var(--headings-color);
     margin: 1rem 0;
   }
 
@@ -22,55 +30,38 @@ html {
   }
 
   a {
-    color: #377ba8;
+    color: var(--font-color);
   }
   
   hr {
     border: none;
-    border-top: 1px solid lightgray;
-  }
-  
-  nav {
-    background: lightgray;
-    display: flex;
-    align-items: center;
-    padding: 0 0.5rem;
-  }
-  
-  nav h1 {
-    flex: auto;
-    margin: 0;
-  }
-  
-  nav h1 a {
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
-  }
-  
-  nav ul  {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav ul li a, nav ul li span, nav ul li input, header .action {
-    display: inline-block;
-    padding: 0.5rem;
-  }
-
-  nav ul li input {
-    padding: 0.2rem;
-    margin: 0.2rem;
+    border-top: 0.2rem solid var(--secondary-color);
+    border-radius: 0.1rem;
+    margin: 0.2rem 0rem;
   }
   
   .content {
-    margin-top: 1rem;
-    padding: 0 1rem 1rem;
-  }
-  
-  .content > header h1 {
-    margin: 1rem 0 0.25rem 0;
+    padding: 0.5rem;
+
+    & label {
+      font-weight: bold;
+      margin-bottom: 0.5em;
+    }
+
+    /*
+    & input {
+      margin-bottom: 1em;
+    }*/
+    
+    & textarea {
+      margin-bottom: 1em;
+      min-height: 12em;
+      resize: vertical;
+    }
+
+    & header h1 {
+      margin: 1rem 0 0.25rem 0;
+    }
   }
   
   .flash {
@@ -80,47 +71,8 @@ html {
     border: 1px solid #377ba8;
   }
   
-  .post > header {
-    display: flex;
-    align-items: flex-end;
-    font-size: 0.85em;
-  }
-  
-  .post > header > div:first-of-type {
-    flex: auto;
-  }
-  
-  .post > header h1 {
-    font-size: 1.5em;
-    margin-bottom: 0;
-  }
-  
-  .post .about {
-    color: slategray;
-    font-style: italic;
-  }
-  
-  .post .body {
-    white-space: pre-line;
-  }
-  
   .content:last-child {
     margin-bottom: 0;
-  }
-  
-  
-  .content label {
-    font-weight: bold;
-    margin-bottom: 0.5em;
-  }
-  
-  .content input, .content textarea {
-    margin-bottom: 1em;
-  }
-  
-  .content textarea {
-    min-height: 12em;
-    resize: vertical;
   }
   
   input.danger {
@@ -134,9 +86,11 @@ html {
   
   .filter-section {
     margin-bottom: 1rem;
+    display: flex;
   }
   
   .filter-buttons {
+    flex: 1;
     display: flex;
   }
   
@@ -144,21 +98,20 @@ html {
     display: inline-block;
     padding: 0.3rem 0.4rem 0.2rem 0.4rem;
     margin-right: 10px;
-    background-color: #3498db; /* Blue background color */
+    background-color: var(--primary-color); /* Blue background color */
     color: #fff; /* White text color */
-    border-radius: 20px; /* Rounded corners */
+    border-radius: 5px; /* Rounded corners */
     text-decoration: none; /* Remove underline */
   }
 
   .filter-non-tag {
-    color: #3498db;
+    color: var(--primary-color);
     padding: 0.3rem 0.4rem 0.2rem 0.4rem;
     display: inline-block;
-    margin-right: 10px;
   }
   
   .filter-button:hover {
-    background-color: #2980b9; /* Darker blue background color on hover */
+    background-color: var(--primary-color); /* Darker blue background color on hover */
   }
 
   .search-container form {
@@ -166,18 +119,17 @@ html {
     align-items: center; /* Align items vertically center */
   }
   
-  
   .search-input {
+    margin-bottom: 0;
     margin-right: 5px; /* Add some spacing between input and button */
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
   }
-  
+
   .search-button {
-    margin-bottom: 1em;
     padding: 8px 12px;
-    background-color: #3498db;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 4px;
@@ -186,77 +138,77 @@ html {
   
   /* Optional: Hover effect */
   .search-button:hover {
-    background-color: #2980b9;
+    background-color: var(--primary-color);
   }
 
-  nav {
-    background-color: #349bdb;;
-    color: #555;
-    padding: 10px 0;
-  }
-  
-  nav h1 {
-    margin: 0;
-    padding: 0 20px;
-  }
-  nav a {
-    color: white;
-  }
-  nav ul {
-    list-style-type: none;
-  }
-  
-  nav ul li {
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  nav ul li a:hover {
-    background-color: #555;
-  }
 
+  /* ----------------------------------------------------
+   Recipe list page  (index and search results)
+   ------------------------------------------------------
+   */
   .recipe-title {
     margin: 0.5rem;
-    background-color: #349bdb;
-    background-blend-mode: soft-light;
-    border-radius: 5px;
-  }
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.85em;
 
-  .recipe-title a {
-    text-decoration: none;
-  }
+    & h1 {
+      font-size: 1.5em;
+      margin-bottom: 0;
+    }
 
-  .recipe-title p {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.5em;
-  }
+    & a {
+      text-decoration: none;
+      padding: 0.2rem;
+    }
 
+    & a:hover {
+      background-color: var(--secondary-color);
+      border-radius: 5px;
+      opacity: 0.5;
+    }
+
+    & p {
+      text-decoration: none;
+      font-size: 1.5em;
+    }
+  }
+  
+  .recipe-title > a:first-of-type {
+    flex: auto;
+  } 
+  /* ----------------------------------------------------  */
+
+  /* ----------------------------------------------------
+   Full details page 
+   ------------------------------------------------------
+   */
   .recipe-header {
     display: flex;
     align-items: center; /* Vertically center elements */
-    border-bottom: 1px solid lightgray;
+    border-bottom: 0.2rem solid var(--secondary-color);
+    border-radius: 0.1rem;
+
+    & h1 {
+      flex: 1;
+      text-decoration: none;
+      font-size: 1.5em;
+      margin: 0;
+    }
   }
 
-  .recipe-header h1 {
-    flex: 1;
-    text-decoration: none;
-    font-size: 1.5em;
-    margin: 0;
-  }
   .edit-button {
-    padding: 0.3rem 0.4rem 0.2rem 0.4rem;
-    margin-right: 10px;
-    background-color: #3498db; /* Blue background color */
+    background-color: var(--secondary-color); /* background color */
     color: #fff; /* White text color */
-    border-radius: 20px; /* Rounded corners */
+
     text-decoration: none; /* Remove underline */
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
   }
+
+  .edit-button:hover {
+    background-color: var(--primary-color);
+  }
+  /* ----------------------------------------------------  */
