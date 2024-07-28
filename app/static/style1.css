@@ -13,7 +13,7 @@ html {
   }
   
   body {
-    max-width: 90%;
+    max-width: 80%;
     margin: 0 auto;
     background: white;
   }
@@ -85,18 +85,23 @@ html {
   }
   
   .filter-section {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
   
   .filter-buttons {
     flex: 1;
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 3px;
   }
   
   .filter-button {
     display: inline-block;
-    padding: 0.3rem 0.4rem 0.2rem 0.4rem;
+    padding: 3px 5px 4px 5px;
     margin-right: 10px;
     background-color: var(--primary-color); /* Blue background color */
     color: #fff; /* White text color */
@@ -106,7 +111,7 @@ html {
 
   .filter-non-tag {
     color: var(--primary-color);
-    padding: 0.3rem 0.4rem 0.2rem 0.4rem;
+    padding: 3px 6px 5px 6px;
     display: inline-block;
   }
   
@@ -117,6 +122,7 @@ html {
   .search-container form {
     display: flex;
     align-items: center; /* Align items vertically center */
+    margin-bottom: 3px;
   }
   
   .search-input {
@@ -199,7 +205,7 @@ html {
 
   .edit-button {
     background-color: var(--secondary-color); /* background color */
-    color: #fff; /* White text color */
+    color: rgb(67, 65, 65);    ; /* White text color */
 
     text-decoration: none; /* Remove underline */
     padding: 5px 10px;

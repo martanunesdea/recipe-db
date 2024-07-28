@@ -6,7 +6,7 @@ def parse_website_instructions(url):
     
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
-        instructions_element = soup.find(string=lambda text: text and 'instructions' in text.lower())
+        instructions_element = soup.find(string=lambda text: text and 'ingredients' in text.lower())
 
         if instructions_element:
             # Find the parent element containing the instructions
@@ -37,6 +37,6 @@ if __name__ == "__main__":
     #website_url = 'https://www.bbcgoodfood.com/recipes/best-ever-macaroni-cheese-recipe'
     #website_url = 'https://www.bbcgoodfood.com/recipes/pan-fried-sea-bass-citrus-dressed-broccoli'
     #website_url = 'https://crumbsandcaramel.com/vegan-pesto-risotto-roasted-tomatoes-chickpeas/'
-    url = 'https://www.acouplecooks.com/chickpea-curry/'
-    instructions_text = parse_website_instructions(url)
+    website_url =  'https://www.olivemagazine.com/recipes/family/spinach-ricotta-and-pesto-lasagne/'
+    instructions_text = parse_website_instructions(website_url)
     print(instructions_text)

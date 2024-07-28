@@ -60,6 +60,8 @@ def update(id):
 @bp.route('/<int:id>/view_full_details', methods=('GET',))
 def view_full_details(id):
     title, ingredients, instructions, tags = recipe_get_one(id)
+    if tags is None:
+        tags = []
     return render_template('recipes/view_full_details.html', id=id, title=title, ingredients=ingredients, instructions=instructions, tags=tags)
 
 

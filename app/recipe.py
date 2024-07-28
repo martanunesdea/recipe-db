@@ -40,7 +40,10 @@ def recipe_get_one(id):
     # Prepare for display
     ingredients = ingredients.split('\n')
     instructions = instructions.split('\n')
-    tags = tags.split('\n')
+    try:
+        tags = tags.split('\n')
+    except:
+        pass
 
 
     return title, ingredients, instructions, tags

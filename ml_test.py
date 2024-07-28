@@ -6,7 +6,7 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense
 # Sample data
 input_instructions = [
     "Start by preheating the oven to 350°F.",
-    "In a large mixing bowl, combine the flour and sugar.",
+    "In a largeº mixing bowl, combine the flour and sugar.",
     "Beat the eggs and add them to the mixture.",
     "Pour the batter into a greased baking pan."
 ]

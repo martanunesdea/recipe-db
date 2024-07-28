@@ -1,0 +1,21 @@
+Leek fondue linguine
+Ingredients
+4 large leeks, whites and pale green parts shredded
+50g butter
+60ml white wine
+6 tbsp crème fraîche
+400g linguine
+(or veggie alternative) shavings for the top parmesan or grana padano
+½ lemon
+Instructions
+1. Put the leeks with half of the butter in a pan and melt the butter around the leeks. Add the remaining butter and white wine and cook very gently for 5 minutes. Add the crème fraîche and cook for another 15 minutes, or until the leeks are meltingly soft. Season well.
+2. Cook the pasta and toss it with the leek fondue, divide between 4 bowls and add a handful of parmesan shavings and a squeeze of lemon juice.INSERT INTO recipes (title, ingredients, instructions) VALUES ('Leek fondue linguine', '4 large leeks, whites and pale green parts shredded
+50g butter
+60ml white wine
+6 tbsp crème fraîche
+400g linguine
+(or veggie alternative) shavings for the top parmesan or grana padano
+½ lemon', '1. Put the leeks with half of the butter in a pan and melt the butter around the leeks. Add the remaining butter and white wine and cook very gently for 5 minutes. Add the crème fraîche and cook for another 15 minutes, or until the leeks are meltingly soft. Season well.
+2. Cook the pasta and toss it with the leek fondue, divide between 4 bowls and add a handful of parmesan shavings and a squeeze of lemon juice.');
+
+

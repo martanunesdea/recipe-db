@@ -7,7 +7,7 @@ CREATE TABLE recipes (
   title TEXT NOT NULL,
   ingredients TEXT NOT NULL,
   instructions TEXT NOT NULL,
-  tags TEXT NOT NULL
+  tags TEXT
 );
 
 CREATE TABLE ingredients (

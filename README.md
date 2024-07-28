@@ -44,3 +44,12 @@ MongoDB is used as the database solution, because it provides more flexibility w
 The Mongo database instance was generated on Mongo Atlas, and two collections were created: "users" and "recipes".
 - "users" collection: Designed to store the email, username and password hashes. 
 - "recipes" collection: Design to store the details of the recipes. Currently, it doesn't store the author id or author name, although this could be implemented in the future.
+
+## How to run the project
+Dependencies for the project:
+- Python
+- Flask
+- PyMongo
+- MongoDB Collection - this is running on a cloud instance. It will go dormant after extended periods of being unused. Will need to log in and activate the collection if that's the case.
+
+On the terminal run "flask run". 

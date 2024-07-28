@@ -2,6 +2,7 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
+from recipes.db_import_recipes import parse_text
 
 def get_db():
     if 'db' not in g:
@@ -24,7 +25,11 @@ def init_db():
 
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
-    
+
+    with current_app.open_resource('test_schema.sql') as f:
+        db.executescript(f.read().decode('utf8'))
+
+     
 
 @click.command('init-db')
 @with_appcontext
