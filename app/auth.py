@@ -23,6 +23,7 @@ def register():
 
 @bp.route('/logout')
 def logout():
+    # TODO: should this move to user - logout?
     session.clear()
     return redirect(url_for('index'))
     
