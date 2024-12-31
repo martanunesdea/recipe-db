@@ -553,7 +553,7 @@ Stir in 150g dried red lentils and 450ml vegetable stock and simmer for 15-20 mi
 Stir in a handful chopped fresh coriander and the pepper and aubergine. Serve with warm naan bread.");
 
 
-INSERT INTO recipes (title, ingredients, instructions) VALUES ("spinach and ricotta pesto lasagne", "100g butter
+INSERT INTO recipes (title, ingredients, instructions) VALUES ("Spinach and ricotta pesto lasagne", "100g butter
 100g plain flour
 600ml semi-skimmed milk
 400g ricotta
@@ -567,3 +567,157 @@ roughly 225g dried lasagne sheets
 to serve watercress", "STEP 1Melt the butter in a large pan, then stir in the flour and cook for 2 minutes. Whisk in the milk gradually, one splash at a time, to make a smooth sauce. Bring to a gentle bubble while still stirring, then cook for a couple of minutes until thickened.STEP 2Turn off the heat and whisk in the ricotta until smooth, followed by half of the parmesan. Season and add plenty of nutmeg. Spoon out a couple of ladlefuls of the sauce and reserve for the top of the lasagne, then stir the chopped spinach and spring onions into the rest of the sauce.STEP 3Spread a third of the spinach sauce over the bottom of a large baking dish (or 8 individual dishes). Add a layer of pasta, then spread or brush over a third of the pesto. Top with another third of the spinach sauce, followed by pasta and pesto, then repeat the layers once more. Add a final layer of pasta, then spread over the reserved white sauce. Scatter with the pine nuts and remaining parmesan. Freeze now.STEP 4Heat the oven to 180C/ fan 160C/gas 4 and bake for 40-45 minutes until bubbling, browned and crisp on top. Serve with watercress.");
 
 
+INSERT INTO recipes (title, ingredients, instructions) VALUES ("Aubergine Dal", "White basmati rice (130g)
+Curry powder (1tbsp)
+Curry powder (1tbsp)
+Vegetable stock mix (11g)
+Vegetable stock mix (11g)
+Ground turmeric (1tsp)
+Ground turmeric (1tsp)
+Aubergine
+Aubergine
+Solid creamed coconut (50g)
+Solid creamed coconut (50g)
+Red lentils (100g)
+Red lentils (100g) †
+Black mustard seeds (1tsp)
+Black mustard seeds (1tsp) †
+Fresh root ginger (15g)
+Fresh root ginger (15g)
+Garlic clove x3
+Garlic clove x3
+Cider vinegar (15ml)
+Cider vinegar (15ml)
+Coriander (20g)
+Coriander (20g)
+Green chilli
+Green chilli
+Shallot x3
+Shallot x3
+You’ll also need pepper, salt, sugar, vegetable oil, water (or dietary alternatives)", "Boil a full kettle
+Add your basmati rice and 300ml [390ml] [600ml] cold water to a pot with a lid and bring to the boil over a high heat
+Once boiling, reduce the heat to very low and cook, covered, for 10-12 min or until all the water has absorbed and the rice is cooked
+Once cooked, remove from the heat and keep covered until serving
+While the rice is cooking, peel and finely slice half your shallots, then peel and finely slice half your garlic (you'll use the rest later!)
+Chop your creamed coconut roughly (if required!)
+Dissolve your vegetable stock mix and chopped creamed coconut in 600ml [800ml] [1L] boiled water – this is your coconut stock
+Rinse your red lentils in a sieve under cold running water
+Trim the green stalk[s] off your aubergine[s] and discard, then slice lengthways, into strips
+Heat a large, wide-based pan (preferably non-stick with a matching lid) with a very generous drizzle of vegetable oil over a medium-high heat
+Once hot, add the aubergine strips with a pinch of salt and cook, covered, for 10-12 min, turning occasionally until golden and tender
+Tip: Add a drizzle more oil if your pan is looking a little dry!
+Heat a separate pot with a drizzle of vegetable oil over a medium heat
+Once hot, add the sliced shallot, sliced garlic, curry powder and half your ground turmeric (you’ll use the rest later!) and cook for 1 min, then add the lentils and cook for 1 min further
+Add the coconut stock, bring to the boil over a high heat, and cook for 15-20 min or until the lentils are tender and starting to break down – this is your Sri Lankan-style coconut dal
+Whilst everything is cooking, slice your green chilli[es] in half lengthways, then slice diagonally into strips
+Peel and chop the remaining shallot[s] into wedges
+Peel and finely chop (or grate) the remaining garlic
+Peel (scrape the skin off with a teaspoon) and finely chop (or grate) your ginger
+Chop your coriander finely, including the stalks (save a few leaves for garnish!)
+Combine the chopped garlic with the chopped ginger, chopped coriander, cider vinegar, black mustard seeds and 1 tbsp [1 1/2 tbsp] [2 tbsp] sugar in a bowl – this is your pickling liquid
+Once the aubergine is golden and tender, transfer it to kitchen paper and return the pan to a medium heat
+Add the sliced green chilli (can't handle the heat? Go easy!) and shallot wedges with the remaining ground turmeric and cook for 2-3 min
+Return the cooked aubergine to the pan with the pickling liquid and cook for 2-3 min or until all the liquid has evaporated – this is your aubergine pickle
+Serve the Sri Lankan-style coconut dal with the basmati rice to the side
+Top with the aubergine pickle, garnish with the reserved coriander leaves and season with a grind of black pepper
+Serves 2
+Source: Gousto");
+
+
+INSERT INTO recipes (title, ingredients, instructions) VALUES ("Aubergine Dal", "White basmati rice (130g)
+Curry powder (1tbsp)
+Curry powder (1tbsp)
+Vegetable stock mix (11g)
+Vegetable stock mix (11g)
+Ground turmeric (1tsp)
+Ground turmeric (1tsp)
+Aubergine
+Aubergine
+Solid creamed coconut (50g)
+Solid creamed coconut (50g)
+Red lentils (100g)
+Red lentils (100g) †
+Black mustard seeds (1tsp)
+Black mustard seeds (1tsp) †
+Fresh root ginger (15g)
+Fresh root ginger (15g)
+Garlic clove x3
+Garlic clove x3
+Cider vinegar (15ml)
+Cider vinegar (15ml)
+Coriander (20g)
+Coriander (20g)
+Green chilli
+Green chilli
+Shallot x3
+Shallot x3
+You’ll also need pepper, salt, sugar, vegetable oil, water (or dietary alternatives)", "Boil a full kettle
+Add your basmati rice and 300ml [390ml] [600ml] cold water to a pot with a lid and bring to the boil over a high heat
+Once boiling, reduce the heat to very low and cook, covered, for 10-12 min or until all the water has absorbed and the rice is cooked
+Once cooked, remove from the heat and keep covered until serving
+While the rice is cooking, peel and finely slice half your shallots, then peel and finely slice half your garlic (you'll use the rest later!)
+Chop your creamed coconut roughly (if required!)
+Dissolve your vegetable stock mix and chopped creamed coconut in 600ml [800ml] [1L] boiled water – this is your coconut stock
+Rinse your red lentils in a sieve under cold running water
+Trim the green stalk[s] off your aubergine[s] and discard, then slice lengthways, into strips
+Heat a large, wide-based pan (preferably non-stick with a matching lid) with a very generous drizzle of vegetable oil over a medium-high heat
+Once hot, add the aubergine strips with a pinch of salt and cook, covered, for 10-12 min, turning occasionally until golden and tender
+Tip: Add a drizzle more oil if your pan is looking a little dry!
+Heat a separate pot with a drizzle of vegetable oil over a medium heat
+Once hot, add the sliced shallot, sliced garlic, curry powder and half your ground turmeric (you’ll use the rest later!) and cook for 1 min, then add the lentils and cook for 1 min further
+Add the coconut stock, bring to the boil over a high heat, and cook for 15-20 min or until the lentils are tender and starting to break down – this is your Sri Lankan-style coconut dal
+Whilst everything is cooking, slice your green chilli[es] in half lengthways, then slice diagonally into strips
+Peel and chop the remaining shallot[s] into wedges
+Peel and finely chop (or grate) the remaining garlic
+Peel (scrape the skin off with a teaspoon) and finely chop (or grate) your ginger
+Chop your coriander finely, including the stalks (save a few leaves for garnish!)
+Combine the chopped garlic with the chopped ginger, chopped coriander, cider vinegar, black mustard seeds and 1 tbsp [1 1/2 tbsp] [2 tbsp] sugar in a bowl – this is your pickling liquid
+Once the aubergine is golden and tender, transfer it to kitchen paper and return the pan to a medium heat
+Add the sliced green chilli (can't handle the heat? Go easy!) and shallot wedges with the remaining ground turmeric and cook for 2-3 min
+Return the cooked aubergine to the pan with the pickling liquid and cook for 2-3 min or until all the liquid has evaporated – this is your aubergine pickle
+Serve the Sri Lankan-style coconut dal with the basmati rice to the side
+Top with the aubergine pickle, garnish with the reserved coriander leaves and season with a grind of black pepper
+Serves 2
+Source: Gousto");
+
+INSERT INTO recipes (title, ingredients, instructions) VALUES ("Courgette and caramlised onion Pilaf", "300g basmati rice
+50g butter
+2 onions, finely sliced
+2 tsp black mustard seeds
+2 tsp cumin seeds
+2 cloves garlic, finely chopped
+A thumb-sized piece of ginger, finely chopped
+1 courgette, sliced
+2 ripe tomatoes, diced
+1 cinnamon stick, broken in half
+2 cardamom pods
+2 strips of lemon zest
+600ml chicken stock
+A handful of mint leaves, shredded
+A handful of flat-leaf parsley, finely chopped
+Raita, to serve (optional)", "Tip the rice into a bowl, fill with cold water and move the grains around until the water is very cloudy. Gently tip the water out, refill and repeat until the water is clear. Drain really well.
+Melt the butter in a large lidded pan or casserole over a medium-high heat and cook the onions with a large pinch of salt for 20 minutes, stirring regularly, until really caramelised. 
+Scoop out 1/3 into a small bowl.
+Add the seeds and cook for a minute until smelling toasty. 
+Tip in the garlic, ginger and courgette, and cook for a few minutes until starting to soften, then add the tomatoes, spices, lemon zest and rice, and mix really well, until all the grains of rice are coated.
+Pour in the stock, add lots of seasoning and bring to the boil for 1 minute, then reduce to a low heat. 
+Put some foil over the pan with the lid on top and cook gently for 10 minutes without removing the lid. 
+Remove from the heat and leave to steam with the lid still on for 10 minutes.
+Gently fork through the mint and parsley, trying not to break the grains, top with the remaining onions, then serve with raita, if you like.
+Source: Olive Magazine");
+
+
+INSERT INTO recipes (title, ingredients, instructions) VALUES ("Butternut Squash and Sage Risotto", "1kg butternut squash, peeled and cut into bite-size chunks
+3 tbsp olive oil
+bunch of sage leaves picked, half roughly chopped, half left whole
+1½l vegetable stock
+50g butter
+1 onion, finely chopped
+300g risotto rice, (we used arborio)
+1 small glass white wine
+50g parmesan or vegetarian alternative, finely grated", "Heat the oven to 220C/200C fan/gas 7. Toss the squash in 1 tbsp oil together with the chopped sage. Scatter into a shallow roasting tin and roast for 30 mins until brown and soft.
+While the squash is roasting, prepare the risotto. Bring the stock to the boil and keep on a low simmer. In a separate pan, melt half the butter over a medium heat. Stir in the onions and cook gently for 8-10 mins until soft but not coloured, stirring occasionally. Stir the rice into the onions until completely coated in the butter, then stir continuously until the rice is shiny and the edges of the grain start to look transparent.
+Pour in the wine and simmer until completely evaporated. Add the stock, a ladleful at a time, and stirring the rice over a low heat for 25-30 mins, until the rice is cooked al dente (with a slightly firm, starchy bite in the middle). The risotto should be creamy and slightly soupy.
+At the same time, gently fry the whole sage leaves in a little olive oil until crisp, then set aside on kitchen paper. When the squash is cooked, mash half of it to a rough purée and leave half whole. When the risotto is just done, stir through the purée, then add the cheese and remaining butter and leave to rest for a few minutes. Serve the risotto scattered with the whole chunks of squash and the crisp sage leaves.
+Serves: 2
+Source: BBC Good Food");

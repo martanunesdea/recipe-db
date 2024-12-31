@@ -553,7 +553,7 @@ Stir in 150g dried red lentils and 450ml vegetable stock and simmer for 15-20 mi
 Stir in a handful chopped fresh coriander and the pepper and aubergine. Serve with warm naan bread.");
 
 
-INSERT INTO recipes (title, ingredients, instructions) VALUES ("spinach and ricotta pesto lasagne", "100g butter
+INSERT INTO recipes (title, ingredients, instructions) VALUES ("Spinach and ricotta pesto lasagne", "100g butter
 100g plain flour
 600ml semi-skimmed milk
 400g ricotta

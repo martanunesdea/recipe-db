@@ -36,7 +36,6 @@ def read_file_lines(file_path):
 
 
 # Example usage:
-
 table_name = 'recipes'
 column_names = ['title', 'ingredients', 'instructions']
 file_path = 'test_schema.sql'

@@ -2,7 +2,7 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
-from recipes.db_import_recipes import parse_text
+from recipes.db_parse_bulk import parse_text
 
 def init_app(app):
     app.teardown_appcontext(close_db)
@@ -105,8 +105,8 @@ def db_insert_recipe(item):
 
 def db_update(id, title, ingredients, instructions, tags):
     db = get_db()
-    query = f"UPDATE recipes SET ingredients = ?, instructions = ?, tags = ? WHERE title = ?;"
-    val = (ingredients, instructions, tags, title)
+    query = f"UPDATE recipes SET title = ?, ingredients = ?, instructions = ?, tags = ? WHERE id = ?;"
+    val = (title, ingredients, instructions, tags, id)
     db.cursor().execute(query, val)
     db.commit()
 
