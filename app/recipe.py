@@ -65,10 +65,11 @@ def recipe_update(id, form):
     title = form['title']
     ingredients = form['ingredients']
     instructions = form['instructions']
+    tags = form['tags']
     if not title:
             return('Title is required.')
     else:
-        db_update(id, title, ingredients, instructions)
+        db_update(id, title, ingredients, instructions, tags)
     return
 
 def recipe_delete(id):

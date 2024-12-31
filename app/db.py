@@ -103,10 +103,10 @@ def db_insert_recipe(item):
     db.commit()
        
 
-def db_update(id, title, ingredients, instructions):
+def db_update(id, title, ingredients, instructions, tags):
     db = get_db()
-    query = f"UPDATE recipes SET ingredients = ?, instructions = ? WHERE title = ?;"
-    val = (ingredients, instructions, title)
+    query = f"UPDATE recipes SET ingredients = ?, instructions = ?, tags = ? WHERE title = ?;"
+    val = (ingredients, instructions, tags, title)
     db.cursor().execute(query, val)
     db.commit()
 
