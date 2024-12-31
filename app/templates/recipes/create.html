@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Recipe{% endblock %}</h1>
+  <h2 class="form-header">{% block title %}New Recipe{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
-  <form action="" method="post">
+  <form action="" method="post" class="my-form">
     {{ form.hidden_tag() }}
     <p>
       {{ form.title.label }}<br>
