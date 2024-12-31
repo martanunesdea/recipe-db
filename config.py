@@ -35,5 +35,5 @@ class TestConfig(Config):
     FLASK_ENV = 'development'
     DEBUG = True
     TESTING = True
-   # DATABASE_URI = environ.get('DEV_DATABASE_URI')
-    MONGO_URI = 'mongodb+srv://cooluser:password12345@cluster0.sbchk.mongodb.net/recipe-db-test?retryWrites=true&w=majority'
+    STATIC_FOLDER = 'static'
+    TEMPLATES_FOLDER = 'templates'
