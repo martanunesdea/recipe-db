@@ -1,8 +1,8 @@
 from setuptools import find_packages, setup
 
 setup(
-    name='flaskr',
-    version='1.0.0',
+    name='recipe_db',
+    version='1.0.1',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

@@ -3,11 +3,11 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from app.auth import login_required
+from recipe_db.auth import login_required
 from .recipe import recipe_get_all, recipe_add, recipe_get_one
 from .recipe import recipe_delete, recipe_update, recipe_lookup_id, recipe_search, recipe_get_popular_tags
 bp = Blueprint('home', __name__)
-from app.forms import PostForm
+from recipe_db.forms import PostForm
 
 @bp.route('/')
 def index():

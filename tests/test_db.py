@@ -1,6 +1,6 @@
 import sqlite3
 import pytest
-from app.db import get_db
+from recipe_db.db import get_db
 """
 def test_get_recipe():
     response = db.db_get_recipes()

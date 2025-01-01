@@ -1,9 +1,8 @@
 from flask import Flask
-from config import *
 import os
 
 # create and configure the app
-def create_app(test_config=None):
+def create_app(app_environment=None):
     app = Flask(__name__, instance_relative_config=True)
 
     app.config.from_mapping(
@@ -11,14 +10,9 @@ def create_app(test_config=None):
         DATABASE='db.sqlite',
     )
 
-    if test_config is None:
-        # load the normal "dev" config
-        app.config.from_object('config.Config')
-        # load the instance config, if it exists, when not testing
-        # app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the "test" config
-        app.config.from_object('config.TestConfig')
+    if app_environment == 'production':
+        app = Flask(__name__)
+        app.config.from_envvar('PROD_ENV')
 
     # ensure the instance folder exists
     try:
@@ -41,4 +35,4 @@ def create_app(test_config=None):
 
 
 if __name__== "__main__":
-    app = create_app()
+    app = create_app(os.getenv('FLASK_ENV', 'dev'))

@@ -4,7 +4,7 @@ from flask import (
 )
 
 from .user import user_validate, user_register, user_authenticate, user_login, user_get_user_by_id
-from app.forms import LoginForm
+from recipe_db.forms import LoginForm
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=('GET', 'POST'))

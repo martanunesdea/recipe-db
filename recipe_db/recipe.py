@@ -1,4 +1,4 @@
-from app.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update, db_text_search
+from recipe_db.db import db_get_recipes, db_lookup, db_insert_recipe, db_delete, db_update, db_text_search
 
 # Utilities
 def parse(recipe):
